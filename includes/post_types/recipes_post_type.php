@@ -326,7 +326,7 @@ class SocialChef_Recipes_Post_Type extends SocialChef_BaseSingleton {
 		
 		register_post_type( 'recipe', $args );	
 	}
-	
+
 	function create_meal_course_taxonomy(){
 	
 		global $sc_theme_globals;
@@ -361,9 +361,9 @@ class SocialChef_Recipes_Post_Type extends SocialChef_BaseSingleton {
 				'rewrite'           			=> array( 'slug' => $meal_course_permalink_slug ),
 			);
 		
-		register_taxonomy( 'recipe_meal_course', array( 'recipe' ), $args );
+	//	register_taxonomy( 'recipe_meal_course', array( 'recipe' ), $args );
 	}
-	
+
 	function create_recipe_category_taxonomy() {
 	
 		global $sc_theme_globals;
@@ -372,9 +372,9 @@ class SocialChef_Recipes_Post_Type extends SocialChef_BaseSingleton {
 
 		$labels = array(
 				'name'              			=> __( 'Categories', 'taxonomy general name', 'socialchef' ),
-				'singular_name'     			=> __( 'Category', 'taxonomy singular name', 'socialchef' ),
-				'search_items'      			=> __( 'Search categories', 'socialchef' ),
-				'all_items'         			=> __( 'All categories', 'socialchef' ),
+				'singular_name'     			=> __( 'Categorie', 'taxonomy singular name', 'socialchef' ),
+				'search_items'      			=> __( 'Rechercher catégories', 'socialchef' ),
+				'all_items'         			=> __( 'Toutes les catégories', 'socialchef' ),
 				'parent_item'                	=> null,
 				'parent_item_colon'          	=> null,
 				'edit_item'         			=> __( 'Edit Category', 'socialchef' ),
@@ -435,7 +435,7 @@ class SocialChef_Recipes_Post_Type extends SocialChef_BaseSingleton {
 				'rewrite'           			=> array( 'slug' => $difficulty_permalink_slug ),
 			);
 		
-		register_taxonomy( 'recipe_difficulty', array( 'recipe' ), $args );
+	//	register_taxonomy( 'recipe_difficulty', array( 'recipe' ), $args );
 	}
 	
 	function create_ingredient_taxonomy() {
@@ -472,7 +472,7 @@ class SocialChef_Recipes_Post_Type extends SocialChef_BaseSingleton {
 				'rewrite'           			=> array( 'slug' => $ingredient_permalink_slug ),
 			);
 		
-		register_taxonomy( 'ingredient', array( 'recipe' ), $args );
+		//register_taxonomy( 'ingredient', array( 'recipe' ), $args );
 	}
 	
 	function create_ingredient_unit_taxonomy(){
@@ -505,7 +505,7 @@ class SocialChef_Recipes_Post_Type extends SocialChef_BaseSingleton {
 				'rewrite'           			=> false,
 			);
 		
-		register_taxonomy( 'ingredient_unit', array( 'recipe' ), $args );
+	//	register_taxonomy( 'ingredient_unit', array( 'recipe' ), $args );
 	}
 	
 	function create_nutritional_element_taxonomy() {
@@ -542,7 +542,7 @@ class SocialChef_Recipes_Post_Type extends SocialChef_BaseSingleton {
 				'rewrite'           			=> array( 'slug' => $nutritional_element_permalink_slug ),
 			);
 		
-		register_taxonomy( 'nutritional_element', array( 'recipe' ), $args );
+		//register_taxonomy( 'nutritional_element', array( 'recipe' ), $args );
 	}
 		
 	function create_nutritional_unit_taxonomy(){
@@ -575,8 +575,10 @@ class SocialChef_Recipes_Post_Type extends SocialChef_BaseSingleton {
 				'rewrite'           			=> false,
 			);
 		
-		register_taxonomy( 'nutritional_unit', array( 'recipe' ), $args );
+		//register_taxonomy( 'nutritional_unit', array( 'recipe' ), $args );
 	}
+
+
 
 	function manage_edit_recipe_columns($columns) {
 	
@@ -754,7 +756,7 @@ class SocialChef_Recipes_Post_Type extends SocialChef_BaseSingleton {
 		);	
 		add_filter('get_terms_orderby',  array($this, 'random_terms_orderby') );
 
-		$ingredient_terms = get_terms( array('ingredient'), $iargs );	
+		$ingredient_terms = get_terms( array('recipe_category'), $iargs );
 
 		remove_filter('get_terms_orderby', array($this, 'random_terms_orderby') );
 		return $ingredient_terms;
