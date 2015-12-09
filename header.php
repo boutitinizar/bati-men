@@ -82,11 +82,11 @@
 			</nav>
 			<?php } ?>
 			<nav class="user-nav" role="navigation">
-				<ul>
-					<li class="light"><a href="<?php echo esc_url ($sc_theme_globals->get_search_form_page_url() ); ?>" title="<?php _e('Recherche produit', 'socialchef'); ?>"><i class="ico i-search"></i> <span><?php _e('Recherche produit', 'socialchef'); ?></span></a></li>
-					<li class="medium"><a href="<?php echo is_user_logged_in() ? esc_url ( $account_uri ) : esc_url ( $sc_theme_globals->get_login_page_url() ); ?>" title="<?php _e('Mon compte', 'socialchef'); ?>"><i class="ico i-account"></i> <span><?php _e('Mon compte', 'socialchef'); ?></span></a></li>
-		<li class="dark"><a href="<?php echo is_user_logged_in() ? esc_url ( $sc_theme_globals->get_submit_recipes_url() ) : esc_url ( $sc_theme_globals->get_login_page_url() ); ?>" title="<?php _e('proposer un produit', 'socialchef'); ?>"><i class="ico i-submitrecipe"></i> <span><?php _e('proposer un produit', 'socialchef'); ?></span></a></li>
-		</ul>
+			<ul>
+				<li class="light"><a href="<?php echo esc_url ($sc_theme_globals->get_search_form_page_url() ); ?>" title="<?php _e('Recherche une offre', 'socialchef'); ?>"><i class="ico i-search"></i> <span><?php _e('Recherche une offre', 'socialchef'); ?></span></a></li>
+				<li class="medium"><a href="<?php echo is_user_logged_in() ? esc_url ( $account_uri ) : esc_url ( $sc_theme_globals->get_login_page_url() ); ?>" title="<?php _e('Mon compte', 'socialchef'); ?>"><i class="ico i-account"></i> <span><?php _e('Mon compte', 'socialchef'); ?></span></a></li>
+				<li class="dark"><a href="<?php echo is_user_logged_in() ? esc_url ( $sc_theme_globals->get_submit_recipes_url() ) : esc_url ( $sc_theme_globals->get_login_page_url() ); ?>" title="<?php _e('propose une offre', 'socialchef'); ?>"><i class="ico i-submitrecipe"></i> <span><?php _e('propose une offre', 'socialchef'); ?></span></a></li>
+				</ul>
 		</nav>
 		</div>
 		<!--//wrap-->

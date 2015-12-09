@@ -361,7 +361,7 @@ class SocialChef_Recipes_Post_Type extends SocialChef_BaseSingleton {
 				'rewrite'           			=> array( 'slug' => $meal_course_permalink_slug ),
 			);
 		
-	//	register_taxonomy( 'recipe_meal_course', array( 'recipe' ), $args );
+	 //register_taxonomy( 'recipe_meal_course', array( 'recipe' ), $args );
 	}
 
 	function create_recipe_category_taxonomy() {
@@ -398,7 +398,7 @@ class SocialChef_Recipes_Post_Type extends SocialChef_BaseSingleton {
 				'rewrite'           			=> array( 'slug' => $recipe_category_permalink_slug ),
 			);
 		
-		register_taxonomy( 'recipe_category', array( 'recipe' ), $args );
+		 register_taxonomy( 'recipe_category', array( 'recipe' ), $args );
 	}
 
 	function create_recipe_difficulty_taxonomy(){
@@ -435,7 +435,7 @@ class SocialChef_Recipes_Post_Type extends SocialChef_BaseSingleton {
 				'rewrite'           			=> array( 'slug' => $difficulty_permalink_slug ),
 			);
 		
-	//	register_taxonomy( 'recipe_difficulty', array( 'recipe' ), $args );
+ //register_taxonomy( 'recipe_difficulty', array( 'recipe' ), $args );
 	}
 	
 	function create_ingredient_taxonomy() {
@@ -472,7 +472,7 @@ class SocialChef_Recipes_Post_Type extends SocialChef_BaseSingleton {
 				'rewrite'           			=> array( 'slug' => $ingredient_permalink_slug ),
 			);
 		
-		//register_taxonomy( 'ingredient', array( 'recipe' ), $args );
+		 //register_taxonomy( 'ingredient', array( 'recipe' ), $args );
 	}
 	
 	function create_ingredient_unit_taxonomy(){
@@ -751,8 +751,8 @@ class SocialChef_Recipes_Post_Type extends SocialChef_BaseSingleton {
 		$iargs = array(
 			'orderby'           => 'name', 
 			'order'             => 'ASC',
-			'hide_empty'        => true,
-			'number'            => 20
+			'hide_empty'        => false,
+			'number'            => 10
 		);	
 		add_filter('get_terms_orderby',  array($this, 'random_terms_orderby') );
 
@@ -766,7 +766,7 @@ class SocialChef_Recipes_Post_Type extends SocialChef_BaseSingleton {
 		return "RAND()";
 	}	
 	
-	function list_recipes( $paged = 0, $per_page = -1, $orderby = '', $order = '', $meal_course_ids = array(), $difficulty_ids = array(), $category_ids = array(), $search_args = array(), $ingredient_ids = array(), $featured_only = false, $author_id = null, $include_private = false, $recipe_ids = array() ) {
+	function list_recipes( $paged = 0, $per_page = -1, $orderby = '', $order = '', $meal_course_ids = array(), $difficulty_ids = array(), $category_ids = array(), $search_args = array(), $ingredient_ids = array(), $featured_only = false, $author_id = null, $include_private = false, $recipe_ids = array(),$category_names=array() ) {
 
 		$args = array(
 			'post_type'         => 'recipe',
@@ -778,6 +778,7 @@ class SocialChef_Recipes_Post_Type extends SocialChef_BaseSingleton {
 			'order'				=> $order,
 			'meta_query'        => array('relation' => 'AND')
 		);
+
 		
 		if (count($recipe_ids) > 0) {
 			$args['post__in'] = $recipe_ids;
@@ -834,10 +835,21 @@ class SocialChef_Recipes_Post_Type extends SocialChef_BaseSingleton {
 					'operator'=> 'IN'
 			);
 		}
+
+		if (!empty($category_names)) {
+			die(print_r($category_names));
+			$tax_query[] = array(
+				'taxonomy' => 'recipe_category',
+				'field' => 'term_id',
+				'terms' => $category_names,
+				'operator'=> 'IN'
+			);
+		}
 		
 		if (!empty($ingredient_ids)) {
+
 			$tax_query[] = array(
-					'taxonomy' => 'ingredient',
+					'taxonomy' => 'recipe_category',
 					'field' => 'term_id',
 					'terms' => $ingredient_ids,
 					'operator'=> 'IN'
@@ -892,7 +904,8 @@ class SocialChef_Recipes_Post_Type extends SocialChef_BaseSingleton {
 		if (isset($search_args['keyword']) && strlen($search_args['keyword']) > 0) {
 			$args['s'] = $search_args['keyword'];
 		}
-		
+
+
 		$posts_query = new WP_Query($args);	
 		$recipes = array();
 			

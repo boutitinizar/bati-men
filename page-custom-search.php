@@ -64,6 +64,16 @@ if (isset($_GET['cat'])) {
 		$category_ids[] = $request_cat;
 }
 
+
+$category_names  = array();
+$request_cat_name = 0;
+if (isset($_GET['cat_name'])) {
+	$request_cat_name = wp_kses($_GET['cat_name'], '');
+	if ($request_cat_name > 0)
+		$category_names[] = $request_cat_name;
+}
+
+
 $search_args = array();
 
 $request_serv = 0;
@@ -95,11 +105,11 @@ if (isset($_GET['term'])) {
 }
 
 $ingredient_ids = array();
-if (isset($_GET['ingredients'])) {
-	$ingredient_array = (array)$_GET["ingredients"];
+if (isset($_GET['catbyname'])) {
+	$ingredient_array = (array)$_GET["catbyname"];
 	if (count($ingredient_array)) {
 		foreach ($ingredient_array as $ingredient_string) {
-			$term = get_term_by('name', $ingredient_string, 'ingredient');
+			$term = get_term_by('name', $ingredient_string, 'recipe_category');
 			if ($term) {
 				$ingredient_ids[] = $term->term_id;
 			}
@@ -107,33 +117,34 @@ if (isset($_GET['ingredients'])) {
 	}
 }
 
-$taxonomies = array( 
-    'ingredient',
+$taxonomies = array(
+    'recipe_meal_course',
 );
 
 $args = array(
-    'orderby'           => 'name', 
+    'orderby'           => 'name',
     'order'             => 'ASC',
-    'hide_empty'        => true, 
-    'exclude'           => array(), 
-    'exclude_tree'      => array(), 
+    'hide_empty'        => true,
+    'exclude'           => array(),
+    'exclude_tree'      => array(),
     'include'           => array(),
-    'number'            => '', 
-    'fields'            => 'all', 
-    'slug'              => '', 
+    'number'            => '',
+    'fields'            => 'all',
+    'slug'              => '',
     'parent'            => '',
-    'hierarchical'      => true, 
-    'child_of'          => 0, 
-    'get'               => '', 
+    'hierarchical'      => true,
+    'child_of'          => 0,
+    'get'               => '',
     'name__like'        => '',
     'description__like' => '',
-    'pad_counts'        => false, 
-    'offset'            => '', 
-    'search'            => '', 
+    'pad_counts'        => false,
+    'offset'            => '',
+    'search'            => '',
     'cache_domain'      => 'core'
-); 
+);
 
 $terms = get_terms($taxonomies, $args);
+
 
 ?>
 	<div class="row">
@@ -156,27 +167,27 @@ $terms = get_terms($taxonomies, $args);
 			<div class="recipefinder">
 				<nav class="tabs">
 					<ul>
-						<li class="active"><a href="#tab1" title="<?php _e('Search by ingredients', 'socialchef') ?>"><?php _e('Search by ingredients', 'socialchef') ?></a></li>
-						<li class=""><a href="#tab2" title="<?php _e('Classic search', 'socialchef') ?>"><?php _e('Classic search', 'socialchef') ?></a></li>
+						<li class="active"><a href="#tab1" title="<?php _e('Recherche par catégorie', 'socialchef') ?>"><?php _e('Recherche par catégorie', 'socialchef') ?></a></li>
+						<li class=""><a href="#tab2" title="<?php _e('Recherche classique', 'socialchef') ?>"><?php _e('Recherche classique', 'socialchef') ?></a></li>
 					</ul>
 				</nav>
 				<div class="tab-content" id="tab1" style="display: block;">
 					<form id="custom-search-1" method="get" action="<?php echo SocialChef_Theme_Utils::get_current_page_url(); ?>">
 						<div class="left">
-							<h3><?php _e('Search by ingredients', 'socialchef'); ?></h3>
-							<p><?php _e("Click the '-' to remove an ingredient, or click the ingredient itself to emphasize", 'socialchef'); ?></p>
+							<h3><?php _e('Recherche par catégorie', 'socialchef'); ?></h3>
+							<p><?php _e("Cliquez sur le «-» pour supprimer une catégorie", 'socialchef'); ?></p>
 							<div class="f-row">
 								<input id="ingredient_name" type="text" placeholder="<?php esc_attr_e('Add ingredients (one at a time)', 'socialchef'); ?>" />
 								<button class="add add_search_ingredient">+</button>
 							</div>
 							<div class="added-ingredients"></div>
 							<div class="f-row">
-								<input type="submit" value="<?php esc_attr_e('Search', 'socialchef'); ?>" />
+								<input type="submit" value="<?php esc_attr_e('Recherche', 'socialchef'); ?>" />
 							</div>
 						</div>
 						<div class="right">
 							<div class="ingredients">
-								<h3><?php _e('Do you also have?', 'socialchef'); ?></h3>
+								<h3><?php _e('Avez-vous aussi ?', 'socialchef'); ?></h3>
 								<?php
 									$ingredient_terms = $sc_recipes_post_type->list_random_ingredients();
 									foreach ($ingredient_terms as $term) {
@@ -190,15 +201,15 @@ $terms = get_terms($taxonomies, $args);
 					</form>
 				</div>
 				<div class="tab-content" id="tab2" style="display: none;">
-					<h3><?php _e('Please select your search parameters and press "Search for recipes"', 'socialchef') ?></h3>
+					<h3><?php _e('S\'il vous plaît sélectionnez vos paramètres de recherche et appuyez sur «Recherche des offres "', 'socialchef') ?></h3>
 					<form id="custom-search-2" method="get" action="<?php echo SocialChef_Theme_Utils::get_current_page_url(); ?>">
 						<div class="row">
 							<div class="search one-fourth">
-								<input type="search" name="term" id="search_term" value="<?php echo $request_term; ?>" placeholder="<?php _e('Recipe name', 'socialchef'); ?>">
+								<input type="search" name="term" id="search_term" value="<?php echo $request_term; ?>" placeholder="<?php _e('Nom de l\'offre', 'socialchef'); ?>">
 							</div>
 							<div class="one-fourth">
 								<select name="cat" id="recipe_category">
-									<option value="0"><?php echo __('Select category', 'socialchef'); ?></option>
+									<option value="0"><?php echo __('Sélectionnez une catégorie', 'socialchef'); ?></option>
 									<?php 
 									$args = array( 
 										'taxonomy'=>'recipe_category', 
@@ -219,96 +230,20 @@ $terms = get_terms($taxonomies, $args);
 									} ?>
 								</select>
 							</div>
-							<div class="one-fourth">
-								<select name="mc" id="recipe_meal_course">
-									<option value="0"><?php echo __('Select meal course', 'socialchef'); ?></option>
-									<?php 
-									$args = array( 
-										'taxonomy'=>'recipe_meal_course', 
-										'hide_empty'=>'0'
-									);
-									$recipe_meal_courses = get_categories($args);
 
-									if (count($recipe_meal_courses) > 0) { 
-										for ($i = 0; $i < count($recipe_meal_courses); $i++) {
-											if (isset($recipe_meal_courses[$i])) {
-												$recipe_meal_course = $recipe_meal_courses[$i];
-												$term_id = $recipe_meal_course->term_id;
-												$term_name = $recipe_meal_course->name;
-									?>	
-									<option <?php echo ($term_id == $request_mc ? 'selected="selected"' : ''); ?> value="<?php echo esc_attr( $term_id ); ?>"><?php echo $term_name; ?></option>
-									<?php	}
-										}
-									} ?>
-								</select>
-							</div>
-							<div class="one-fourth">
-								<select name="diff" id="recipe_difficulty">
-									<option value="0"><?php echo __('Select difficulty', 'socialchef'); ?></option>
-									<?php 
-									$args = array( 
-										'taxonomy'=>'recipe_difficulty', 
-										'hide_empty'=>'0'
-									);
-									$recipe_difficulties = get_categories($args);
 
-									if (count($recipe_difficulties) > 0) { 
-										for ($i = 0; $i < count($recipe_difficulties); $i++) {
-											if (isset($recipe_difficulties[$i])) {
-												$recipe_difficulty = $recipe_difficulties[$i];
-												$term_id = $recipe_difficulty->term_id;
-												$term_name = $recipe_difficulty->name;
-									?>	
-									<option <?php echo ( $term_id == $request_diff ? 'selected="selected"' : ''); ?> value="<?php echo esc_attr( $term_id); ?>"><?php echo $term_name; ?></option>
-									<?php	}
-										}
-									} ?>
-								</select>
-							</div>
 						</div>
-						<div class="row">					
-							<div class="one-third">
-								<select name="serv" id="recipe_serving">
-									<option value="0"><?php echo __('Maximum serving size', 'socialchef'); ?></option>
-									<?php 
-									for ($i=1;$i<11;$i++) {?>
-									<option <?php echo ($request_serv == $i ? 'selected="selected"' : ''); ?> value="<?php echo esc_attr( $i ); ?>"><?php echo $i; ?></option>
-									<?php	
-									}
-									?>
-								</select>
-							</div>
-							<div class="one-third">
-								<select name="cook" id="recipe_cooking_time">
-									<option value="0"><?php echo __('Max cooking time', 'socialchef'); ?></option>
-									<?php 
-									for ($i=1;$i<181;$i++) {?>
-									<option <?php echo ($request_cook == $i ? 'selected="selected"' : ''); ?> value="<?php echo esc_attr( $i ); ?>"><?php echo $i; ?></option>
-									<?php	
-									}
-									?>
-								</select>
-							</div>
-							<div class="one-third">
-								<select name="prep" id="recipe_prep_time">
-									<option value="0"><?php echo __('Max preparation time', 'socialchef'); ?></option>
-									<?php 
-									for ($i=1;$i<181;$i++) {?>
-									<option <?php echo ( $request_prep == $i ? 'selected="selected"' : '' ); ?> value="<?php echo esc_attr( $i ); ?>"><?php echo $i; ?></option>
-									<?php	
-									}
-									?>
-								</select>
-							</div>
-						</div>
+
 						<div class="f-row">
-							<input type="submit" value="<?php esc_attr_e('Search for recipes', 'socialchef'); ?>">
+							<input type="submit" value="<?php esc_attr_e('Recherche des offres', 'socialchef'); ?>">
 						</div>
 					</form>
 				</div>
 			</div>				
-			<?php 
-			$recipe_results = $sc_recipes_post_type->list_recipes($paged, $posts_per_page, $sort_by, $sort_order, $meal_course_ids, $difficulty_ids, $category_ids, $search_args, $ingredient_ids); 
+			<?php
+
+			$recipe_results = $sc_recipes_post_type->list_recipes($paged, $posts_per_page, $sort_by, $sort_order, $meal_course_ids, $difficulty_ids, $category_ids, $search_args, $ingredient_ids,false,null,false,array(),$category_names);
+
 			if ( count($recipe_results) > 0 && $recipe_results['total'] > 0 ) { ?>
 				<div class="entries row">
 				<?php
@@ -316,7 +251,7 @@ $terms = get_terms($taxonomies, $args);
 					foreach ($recipe_results['results'] as $recipe_result) {
 						global $post, $sc_recipe_class;
 						$post = $recipe_result;
-						setup_postdata( $post ); 
+						setup_postdata( $post );
 						$sc_recipe_class = 'one-fourth';
 						get_template_part('includes/parts/recipe', 'item');
 						$count++;
@@ -335,7 +270,7 @@ $terms = get_terms($taxonomies, $args);
 				</div>
 			<?php } else { ?>
 			<div class="alert alert-warning">
-				<p><?php _e('Unfortunately no results were found for your query. Please try searching for something else.', 'socialchef'); ?></p>
+				<p><?php _e('Malheureusement aucun résultat n\'a été trouvé pour votre recherche . S\'il vous plaît essayez de rechercher autre chose.', 'socialchef'); ?></p>
 			</div>
 			<?php } ?>
 		</section><!--//three-fourth-->

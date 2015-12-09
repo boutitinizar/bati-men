@@ -1,9 +1,9 @@
 <?php
 	global $post, $sc_recipe_class, $sc_include_edit_link, $sc_theme_globals;
-	
+
 	$recipe_id = $post->ID;
 	$recipe_obj = new sc_recipe($post);
-	$recipe_difficulty = $recipe_obj->get_difficulty();
+	//$recipe_difficulty = $recipe_obj->get_difficulty();
 	$recipe_comments = get_comments_number( $recipe_id );
 ?>
 <!--item-->
@@ -11,7 +11,7 @@
 	<?php if ($sc_include_edit_link) { ?>
 	<a class="edit" href="<?php echo esc_url ( $sc_theme_globals->get_submit_recipes_url() ); ?>?fesid=<?php echo urlencode($recipe_id); ?>" title="<?php _e('Edit recipe', 'socialchef'); ?>"><?php _e('Edit recipe', 'socialchef'); ?></a>
 	<?php } ?>
-<?php 
+<?php
 $main_image = $recipe_obj->get_main_image('thumb-image');
 if (!empty( $main_image ) ) { ?>
 	<figure>

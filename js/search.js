@@ -26,7 +26,7 @@
 				if (ingredientName.length > 0) {
 					var ingredientCount = $(".added-ingredients input.added-ingredient").length;
 					var ingredientIndex = ingredientCount + 1;
-					$(".added-ingredients").append("<div class='f-row'><input type='text' class='added-ingredient' name='ingredients[]' value='" + ingredientName + "' /><button id='added_ingredient_" + ingredientIndex + "' class='remove remove_search_ingredient'>-</button></div>");
+					$(".added-ingredients").append("<div class='f-row'><input type='text' class='added-ingredient' name='catbyname[]' value='" + ingredientName + "' /><button id='added_ingredient_" + ingredientIndex + "' class='remove remove_search_ingredient'>-</button></div>");
 					cs_search.bindNewIngredientButtons('added_ingredient_' + ingredientIndex);
 				}
 				
@@ -41,7 +41,7 @@
 				if (ingredientName.length > 0) {
 					var ingredientCount = $(".added-ingredients input.added-ingredient").length;
 					var ingredientIndex = ingredientCount + 1;
-					$(".added-ingredients").append("<div class='f-row'><input type='text' class='added-ingredient' name='ingredients[]' value='" + ingredientName + "' /><button id='added_ingredient_" + ingredientIndex + "' class='remove remove_search_ingredient'>-</button></div>");
+					$(".added-ingredients").append("<div class='f-row'><input type='text' class='added-ingredient' name='catbyname[]' value='" + ingredientName + "' /><button id='added_ingredient_" + ingredientIndex + "' class='remove remove_search_ingredient'>-</button></div>");
 					cs_search.bindNewIngredientButtons('added_ingredient_' + ingredientIndex);
 					$(this).remove();
 				}

@@ -25,17 +25,17 @@ $posts_per_page = $sc_theme_globals->get_recipes_archive_posts_per_page();
 
 $page_custom_fields = get_post_custom( $page_id);
 
-$meal_courses = wp_get_post_terms($page_id, 'recipe_meal_course', array("fields" => "all"));
-$meal_course_ids = array();
-if (count($meal_courses) > 0) {
-	$meal_course_ids[] = $meal_courses[0]->term_id;
-}
+//$meal_courses = wp_get_post_terms($page_id, 'recipe_meal_course', array("fields" => "all"));
+//$meal_course_ids = array();
+//if (count($meal_courses) > 0) {
+	//$meal_course_ids[] = $meal_courses[0]->term_id;
+//}
 
-$difficulties = wp_get_post_terms($page_id, 'recipe_difficulty', array("fields" => "all"));
-$difficulty_ids = array();
-if (count($difficulties) > 0) {
-	$difficulty_ids[] = $difficulties[0]->term_id;
-}
+//$difficulties = wp_get_post_terms($page_id, 'recipe_difficulty', array("fields" => "all"));
+//$difficulty_ids = array();
+//if (count($difficulties) > 0) {
+//	$difficulty_ids[] = $difficulties[0]->term_id;
+//}
 
 $sort_by = 'title';
 if (isset($page_custom_fields['recipe_list_sort_by'])) {
@@ -86,10 +86,11 @@ else if ($page_sidebar_positioning == 'left' || $page_sidebar_positioning == 'ri
 		<?php endwhile; ?>	
 		<!--three-fourth-->
 		<?php 
-		$recipe_results = $sc_recipes_post_type->list_recipes($paged, $posts_per_page, $sort_by, $sort_order, $meal_course_ids, $difficulty_ids, array(), array(), array(), $show_featured_only); 
+		$recipe_results = $sc_recipes_post_type->list_recipes($paged, $posts_per_page, $sort_by, $sort_order, array(), array(), array(), array(), array(), $show_featured_only);
 		if ( count($recipe_results) > 0 && $recipe_results['total'] > 0 ) { ?>
 		<section class="content <?php echo esc_attr($section_class); ?>">
 			<div class="entries row">
+			 
 			<?php
 				$count = 0;
 				foreach ($recipe_results['results'] as $recipe_result) {
