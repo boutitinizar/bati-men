@@ -101,54 +101,10 @@ class socialchef_Search_Widget extends WP_Widget {
 							} ?>
 						</select>
 					</div>
-					<div class="f-row">
-						<select name="mc">
-							<option value="0"><?php echo $search_meal_course_placeholder; ?></option>
-							<?php 
-							$args = array( 
-								'taxonomy'=>'recipe_meal_course', 
-								'hide_empty'=>'1'
-							);
-							$meal_courses = get_categories($args);
 
-							if (count($meal_courses) > 0) { 
-								for ($i = 0; $i < count($meal_courses); $i++) {
-									if (isset($meal_courses[$i])) {
-										$meal_course = $meal_courses[$i];
-										$term_id = $meal_course->term_id;
-										$term_name = $meal_course->name;
-							?>	
-							<option value="<?php echo esc_attr( $term_id ); ?>"><?php echo $term_name; ?></option>
-							<?php	}
-								}
-							} ?>
-						</select>
-					</div>
-					<div class="f-row">
-						<select name="diff">
-							<option value="0"><?php echo $search_difficulty_placeholder; ?></option>
-							<?php 
-							$args = array( 
-								'taxonomy'=>'recipe_difficulty', 
-								'hide_empty'=>'1'
-							);
-							$difficulties = get_categories($args);
 
-							if (count($difficulties) > 0) { 
-								for ($i = 0; $i < count($difficulties); $i++) {
-									if (isset($difficulties[$i])) {
-										$difficulty = $difficulties[$i];
-										$term_id = $difficulty->term_id;
-										$term_name = $difficulty->name;
-							?>	
-							<option value="<?php echo esc_attr( $term_id ); ?>"><?php echo $term_name; ?></option>
-							<?php	}
-								}
-							} ?>
-						</select>
-					</div>
 					<div class="f-row bwrap">
-						<input type="submit" value="<?php echo esc_attr ($submit_button_text); ?>" />
+						<input type="submit" value="Trouver une offre" />
 					</div>
 				</form>
 			</div>
