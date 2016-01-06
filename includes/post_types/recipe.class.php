@@ -21,7 +21,15 @@ class sc_recipe extends sc_entity
 	public function get_serving() {
 		return $this->get_custom_field( 'serving' );
 	}
-	
+
+
+
+	public function get_post_meta($name){
+		return get_post_meta($this->get_base_id(),$name,true);
+	}
+
+
+
 	public function get_difficulty() {
 		$terms = wp_get_post_terms($this->get_base_id(), 'recipe_difficulty', array('orderby' => 'name', 'order' => 'ASC', 'fields' => 'all'));	
 		$recipe_difficulty = null;

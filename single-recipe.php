@@ -21,6 +21,10 @@ if ( have_posts() ) while ( have_posts() ) :
 	$recipe_obj = new sc_recipe($post);
 	$recipe_id = $recipe_obj->get_id();
 
+	$expirationdatets = $recipe_obj->get_post_meta('_expiration-date');
+	$recipe_Prix = $recipe_obj->get_post_meta('recipe_Prix');
+	$recipe_Remise = $recipe_obj->get_post_meta('recipe_Remise');
+
 
 	// Generate microformat time values for Schema.org compatibility
 	//$mf_recipe_cooking_time = SocialChef_Theme_Utils::time_to_iso8601_duration(strtotime($recipe_cooking_time . " minutes", 0));
@@ -54,39 +58,30 @@ if ( have_posts() ) while ( have_posts() ) :
 						<!--one-third-->
 						<div class="one-third entry-header">
 							<dl class="basic">
-								<?php if (isset($recipe_preparation_time)) { ?>
-								<dt><?php _e('Preparation time', 'socialchef'); ?></dt>
-								<dd itemprop="prepTime" content="<?php echo $mf_recipe_preparation_time; ?>"><?php echo $recipe_preparation_time; ?> <?php _e('mins', 'socialchef'); ?></dd>
+
+
+
+								<?php if($recipe_Prix){ ?>
+									<dt><?php _e('Prix', 'socialchef'); ?></dt>
+									<dd itemprop="prepTime" content="<?php echo $recipe_Prix;  ?>"><?php echo $recipe_Prix;  ?> DT</dd>
 								<?php } ?>
-								<?php if (isset($recipe_cooking_time)) { ?>
-								<dt><?php _e('Cooking time', 'socialchef'); ?></dt>
-								<dd itemprop="cookTime" content="<?php echo $mf_recipe_cooking_time; ?>"><?php echo $recipe_cooking_time; ?> <?php _e('mins', 'socialchef'); ?></dd>
+
+								<?php if($recipe_Remise){ ?>
+									<dt><?php _e('Remise', 'socialchef'); ?></dt>
+									<dd itemprop="prepTime" content="<?php echo $recipe_Remise;  ?>"><?php echo $recipe_Remise;  ?> %</dd>
 								<?php } ?>
-								<?php if (isset($recipe_difficulty)) {
-									$difficulty_link = get_term_link( $recipe_difficulty->term_id, 'recipe_difficulty' );
-								?>
-								<dt><?php _e('Difficulty', 'socialchef'); ?></dt>
-								<dd><a href="<?php echo esc_url( $difficulty_link ); ?>"><?php echo $recipe_difficulty->name; ?></a></dd>
-								<?php } ?>
-								<?php  if (isset($recipe_serving)) { ?>
-								<dt><?php _e('Serves', 'socialchef'); ?></dt>
-								<dd><?php echo $recipe_serving; ?> <?php _e('people', 'socialchef'); ?></dd>
-								<?php } ?>
+
+
+
 							</dl>
 
 							<dl class="user">
-								<?php if (isset($recipe_meal_course)) { ?>
-								<dt><?php _e('Meal course', 'socialchef'); ?></dt>
-								<dd><a href="<?php echo esc_url( get_term_link( $recipe_meal_course->term_id, 'recipe_meal_course' ) ); ?>"><?php echo $recipe_meal_course->name; ?></a></dd>
-								<?php } ?>
+
 								<dt><?php _e('Posté par', 'socialchef'); ?></dt>
 								<dd itemprop="author" class="vcard author post-author"><span class="fn"><a href="<?php echo esc_url( $author_uri ); ?>"><?php echo $author_nice_name; ?></a></span></dd>
 								<dt><?php _e('Posté le', 'socialchef'); ?></dt>
 								<dd  itemprop="datePublished" content="<?php echo get_the_date(); ?>"  class="post-date updated"><?php echo get_the_date(); ?></dd>
 								<?php
-								$expirationdatets = get_post_meta($post->ID,'_expiration-date',true);
-
-
 
 								if($expirationdatets){
 								?>
@@ -115,29 +110,9 @@ if ( have_posts() ) while ( have_posts() ) :
 								?>
 							</dl>
 							<?php } ?>
-							<?php if (defined('BP_VERSION')) { ?>
-							<?php if ( is_user_logged_in() ) { ?>
-							<div class="favorite">
-								<a href="javascript:void(0);" class="remove"><i class="ico eldorado_heart"></i> <span><?php _e('Remove from favorites', 'socialchef'); ?></span></a>
-								<a href="javascript:void(0);"><i class="ico eldorado_heart"></i> <span><?php _e('Add to favorites', 'socialchef'); ?></span></a>
 
-								<?php
-								if ( $sc_recipes_post_type->is_marked_as_favorite($current_user->ID, $post->ID)) {
-									?>
-									<a href="javascript:void(0);" class="remove"><i class="ico eldorado_heart"></i> <span><?php _e('Remove from favorites', 'socialchef'); ?></span></a>
-									<?php
-								} else { ?>
-									<a href="javascript:void(0);"><i class="ico eldorado_heart"></i> <span><?php _e('Add to favorites', 'socialchef'); ?></span></a>
-								<?php } ?>
-							</div>
-							<?php } else { ?>
-							<div class="favorite">
-								<a class="disabled" href="<?php echo esc_url ( $sc_theme_globals->get_login_page_url() ); ?>"><i class="ico eldorado_heart"></i> <span><?php _e('Add to favorites', 'socialchef'); ?></span></a>
-							</div>
-							<?php } ?>
-							<?php } // defined('BP_VERSION')  ?>
 							<div class="favorite2">
-								 <a class="" href="<?php get_template_directory_uri() ?>/pre_prod/contact-2/?a=<?php the_title(); ?> "><i class="ico eldorado_heart"></i> <span><?php _e('J\'aime', 'socialchef'); ?></span></a>
+								 <a class="" href="<?php get_template_directory_uri() ?>/pre_prod/contact-2/?a=<?php the_title(); ?> "><i class="ico eldorado_heart"></i> <span><?php _e('Je m’intéresse', 'socialchef'); ?></span></a>
 							</div>
 							<div class="print">
 								<a class="" onclick="window.print();" href="#"><i class="ico eldorado_print"></i> <span><?php _e('Imprimer l\'offre', 'socialchef'); ?></span></a>

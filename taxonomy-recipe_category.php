@@ -29,7 +29,7 @@ global $sc_theme_globals, $sc_recipes_post_type;
 				if ($colcount % 3 == 0)
 					echo '<div class="entries row">';
 				$sc_recipe_class = 'one-third';
-				get_template_part('includes/parts/recipe', 'item');
+		  	get_template_part('includes/parts/recipe', 'item');
 				$colcount++;
 			endwhile; 
 			if ($found_posts % 3 != 0)

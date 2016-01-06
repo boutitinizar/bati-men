@@ -3,6 +3,8 @@
 
 	$recipe_id = $post->ID;
 	$recipe_obj = new sc_recipe($post);
+$recipe_Prix = $recipe_obj->get_post_meta('recipe_Prix');
+$recipe_Remise = $recipe_obj->get_post_meta('recipe_Remise');
 	//$recipe_difficulty = $recipe_obj->get_difficulty();
 	$recipe_comments = get_comments_number( $recipe_id );
 ?>
@@ -25,10 +27,13 @@ if (!empty( $main_image ) ) { ?>
 		</h2>
 		<div class="actions">
 			<div>
-				<?php if (isset($recipe_difficulty)) { ?>
-				<div class="difficulty"><i class="ico i-<?php echo esc_attr($recipe_difficulty->slug); ?>"></i> <?php echo $recipe_difficulty->name; ?></div>
+
+				<?php if (($recipe_Prix)) { ?>
+				 <div class="likes"><i class="ico"></i><a href="#">Prix: <b><?php echo $recipe_Prix; ?>Dt</b></a></div>
 				<?php } ?>
-				<!-- <div class="likes"><i class="ico i-likes"></i><a href="#">10</a></div>-->
+				<?php if (($recipe_Remise)) { ?>
+				 <div class="likes"><i class="ico"></i><a href="#">Remise: <b><?php echo $recipe_Remise; ?> %</b></a></div>
+				<?php } ?>
 				<div class="comments"><i class="ico i-comments"></i><a href="<?php echo esc_url ($recipe_obj->get_permalink() ); ?>#comments"><?php echo $recipe_comments; ?></a></div>
 			</div>
 		</div>

@@ -83,35 +83,39 @@ class SocialChef_Theme_MetaBoxes extends SocialChef_BaseSingleton {
 				'desc'	=> __('.', 'socialchef'), // description
 				'id'	=> 'recipe_is_featured', // field id and name
 				'type'	=> 'checkbox', // type of field
+			),
+			array( // Post ID select box
+				'label'	=> __('Prix', 'socialchef'), // <label>
+				'desc'	=> __('DT', 'socialchef'), // description
+				'id'	=> 'recipe_Prix', // field id and name
+				'type'	=> 'text', // type of field
+			),
+			array( // Post ID select box
+				'label'	=> __('Remise', 'socialchef'), // <label>
+				'desc'	=> __('%', 'socialchef'), // description
+				'id'	=> 'recipe_Remise', // field id and name
+				'type'	=> 'text', // type of field
 			)
 		);
 		
 		global $sc_theme_globals;
 		if ($sc_theme_globals->enable_nutritional_elements()) {
-		
-
-		
 		}
-		
 		add_action( 'admin_init', array($this, 'recipe_admin_init' ) );
 		add_action( 'admin_init', array($this, 'recipe_list_init' ) );
 		add_action( 'admin_init', array($this, 'pages_meta_box_admin_init' ) );			
 	}
 
 	function recipe_admin_init() {
-		
 		new custom_add_meta_box( 'recipe_custom_meta_fields', __('Extra information', 'socialchef'), $this->recipe_custom_meta_fields, 'recipe', true );
-
 	}
 	
 	
 	function recipe_list_init() {
-
-		$this->recipe_list_meta_box = new custom_add_meta_box( 'recipe_list_custom_meta_fields', __('Extra information', 'socialchef'), $this->recipe_list_custom_meta_fields, 'page' );	
+		$this->recipe_list_meta_box = new custom_add_meta_box( 'recipe_list_custom_meta_fields', __('Extra information', 'socialchef'), $this->recipe_list_custom_meta_fields, 'page' );
 		remove_action( 'add_meta_boxes', array( $this->recipe_list_meta_box, 'add_box' ) );
 		add_action('add_meta_boxes', array($this, 'recipe_list_add_metaboxes_boxes' ) );
 	}
-		
 	function recipe_list_add_metaboxes_boxes() {
 		global $post;
 		$template_file = get_post_meta($post->ID,'_wp_page_template',true);
@@ -119,13 +123,11 @@ class SocialChef_Theme_MetaBoxes extends SocialChef_BaseSingleton {
 			add_meta_box( $this->recipe_list_meta_box->id, $this->recipe_list_meta_box->title, array( $this->recipe_list_meta_box, 'meta_box_callback' ), 'page', 'normal', 'high' );
 		}
 	}
-	
 	function pages_meta_box_admin_init() {
 		$this->page_sidebars_meta_box = new custom_add_meta_box( 'page_sidebars_custom_meta_fields', __('Sidebar selection', 'bookyourtravel'), $this->page_sidebars_custom_meta_fields, 'page' );		
 		remove_action( 'add_meta_boxes', array( $this->page_sidebars_meta_box, 'add_box' ) );
 		add_action('add_meta_boxes', array( $this, 'page_sidebar_add_meta_boxes' ) );		
 	}
-		
 	function page_sidebar_add_meta_boxes() {
 		global $post;
 		$template_file = get_post_meta($post->ID,'_wp_page_template',true);
