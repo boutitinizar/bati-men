@@ -632,19 +632,19 @@ class Frontend_Submit {
 		$output = '';
 		$map = array(
 			'fes-sent' => array(
-				'text' => __( 'Your file was successfully uploaded!', 'socialchef' ),
+				'text' => __( 'Votre fichier a été téléchargé avec succès!', 'socialchef' ),
 				'class' => 'alert-success',
 			),
 			'fes-recipe-sent' => array(
-				'text' => __( 'Your recipe was successfully submitted!', 'socialchef' ),
+				'text' => __( 'Votre offre a été soumis avec succès!', 'socialchef' ),
 				'class' => 'alert-success',
 			),
 			'fes-recipe-updated' => array(
-				'text' => __( 'Your recipe was successfully updated!', 'socialchef' ),
+				'text' => __( ' Votre recette a été mis à jour avec succès!', 'socialchef' ),
 				'class' => 'alert-success',
 			),
 			'fes-error' => array(
-				'text' => __( 'There was an error with your submission', 'socialchef' ),
+				'text' => __( 'Il y avait une erreur avec votre soumission', 'socialchef' ),
 				'class' => 'alert-danger',
 			),
 		);

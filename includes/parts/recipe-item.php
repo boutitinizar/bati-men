@@ -25,7 +25,7 @@ if (!empty( $main_image ) ) { ?>
 		</h2>
 		<div class="actions">
 			<div>
-				<?php if ($recipe_difficulty) { ?>
+				<?php if (isset($recipe_difficulty)) { ?>
 				<div class="difficulty"><i class="ico i-<?php echo esc_attr($recipe_difficulty->slug); ?>"></i> <?php echo $recipe_difficulty->name; ?></div>
 				<?php } ?>
 				<!-- <div class="likes"><i class="ico i-likes"></i><a href="#">10</a></div>-->

@@ -72,7 +72,7 @@ class sc_about_widget extends WP_Widget {
 
 		/* Strip tags to remove HTML (important for text inputs). */
 		$instance['title'] = strip_tags( $new_instance['title'] );
-		$instance['about_text'] = strip_tags( $new_instance['about_text']);
+		$instance['about_text'] =  ( $new_instance['about_text']);
 
 		return $instance;
 	}

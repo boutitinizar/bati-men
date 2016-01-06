@@ -23,8 +23,8 @@ if ( have_posts() ) while ( have_posts() ) :
 
 
 	// Generate microformat time values for Schema.org compatibility
-	$mf_recipe_cooking_time = SocialChef_Theme_Utils::time_to_iso8601_duration(strtotime($recipe_cooking_time . " minutes", 0));
-	$mf_recipe_preparation_time = SocialChef_Theme_Utils::time_to_iso8601_duration(strtotime($recipe_preparation_time . " minutes", 0));
+	//$mf_recipe_cooking_time = SocialChef_Theme_Utils::time_to_iso8601_duration(strtotime($recipe_cooking_time . " minutes", 0));
+	//$mf_recipe_preparation_time = SocialChef_Theme_Utils::time_to_iso8601_duration(strtotime($recipe_preparation_time . " minutes", 0));
 
 	$ingredient_results = $sc_recipes_post_type->list_recipe_ingredients($post->ID);
 
@@ -54,28 +54,28 @@ if ( have_posts() ) while ( have_posts() ) :
 						<!--one-third-->
 						<div class="one-third entry-header">
 							<dl class="basic">
-								<?php if ($recipe_preparation_time) { ?>
+								<?php if (isset($recipe_preparation_time)) { ?>
 								<dt><?php _e('Preparation time', 'socialchef'); ?></dt>
 								<dd itemprop="prepTime" content="<?php echo $mf_recipe_preparation_time; ?>"><?php echo $recipe_preparation_time; ?> <?php _e('mins', 'socialchef'); ?></dd>
 								<?php } ?>
-								<?php if ($recipe_cooking_time) { ?>
+								<?php if (isset($recipe_cooking_time)) { ?>
 								<dt><?php _e('Cooking time', 'socialchef'); ?></dt>
 								<dd itemprop="cookTime" content="<?php echo $mf_recipe_cooking_time; ?>"><?php echo $recipe_cooking_time; ?> <?php _e('mins', 'socialchef'); ?></dd>
 								<?php } ?>
-								<?php if ($recipe_difficulty) {
+								<?php if (isset($recipe_difficulty)) {
 									$difficulty_link = get_term_link( $recipe_difficulty->term_id, 'recipe_difficulty' );
 								?>
 								<dt><?php _e('Difficulty', 'socialchef'); ?></dt>
 								<dd><a href="<?php echo esc_url( $difficulty_link ); ?>"><?php echo $recipe_difficulty->name; ?></a></dd>
 								<?php } ?>
-								<?php if ($recipe_serving) { ?>
+								<?php  if (isset($recipe_serving)) { ?>
 								<dt><?php _e('Serves', 'socialchef'); ?></dt>
 								<dd><?php echo $recipe_serving; ?> <?php _e('people', 'socialchef'); ?></dd>
 								<?php } ?>
 							</dl>
 
 							<dl class="user">
-								<?php if ($recipe_meal_course) { ?>
+								<?php if (isset($recipe_meal_course)) { ?>
 								<dt><?php _e('Meal course', 'socialchef'); ?></dt>
 								<dd><a href="<?php echo esc_url( get_term_link( $recipe_meal_course->term_id, 'recipe_meal_course' ) ); ?>"><?php echo $recipe_meal_course->name; ?></a></dd>
 								<?php } ?>
@@ -83,6 +83,16 @@ if ( have_posts() ) while ( have_posts() ) :
 								<dd itemprop="author" class="vcard author post-author"><span class="fn"><a href="<?php echo esc_url( $author_uri ); ?>"><?php echo $author_nice_name; ?></a></span></dd>
 								<dt><?php _e('Posté le', 'socialchef'); ?></dt>
 								<dd  itemprop="datePublished" content="<?php echo get_the_date(); ?>"  class="post-date updated"><?php echo get_the_date(); ?></dd>
+								<?php
+								$expirationdatets = get_post_meta($post->ID,'_expiration-date',true);
+
+
+
+								if($expirationdatets){
+								?>
+								<dt><?php _e('Expire le ', 'socialchef'); ?></dt>
+								<dd  itemprop="datePublished" content="<?php echo  date('j M Y', $expirationdatets); ?>"  class="post-date updated"><?php echo  date_i18n(get_option('date_format'), $expirationdatets); ?></dd>
+     <?php } ?>
 							</dl>
 
 							<?php
@@ -126,6 +136,9 @@ if ( have_posts() ) while ( have_posts() ) :
 							</div>
 							<?php } ?>
 							<?php } // defined('BP_VERSION')  ?>
+							<div class="favorite2">
+								 <a class="" href="<?php get_template_directory_uri() ?>/pre_prod/contact-2/?a=<?php the_title(); ?> "><i class="ico eldorado_heart"></i> <span><?php _e('J\'aime', 'socialchef'); ?></span></a>
+							</div>
 							<div class="print">
 								<a class="" onclick="window.print();" href="#"><i class="ico eldorado_print"></i> <span><?php _e('Imprimer l\'offre', 'socialchef'); ?></span></a>
 							</div>
@@ -142,7 +155,9 @@ if ( have_posts() ) while ( have_posts() ) :
 								<?php the_content(); ?>
 							</div>
 							<?php } ?>
-							<?php if (count($recipe_instructions) > 0) { ?>
+							<?php
+							if (isset($recipe_instructions)){
+							if (count($recipe_instructions) > 0) { ?>
 							<div class="instructions" itemprop="recipeInstructions">
 								<ol>
 								<?php
@@ -155,7 +170,7 @@ if ( have_posts() ) while ( have_posts() ) :
 								}?>
 								</ol>
 							</div>
-							<?php } ?>
+							<?php }} ?>
 						</div>
 						<!--//two-third-->
 					</div><!--//row-->

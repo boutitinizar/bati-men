@@ -81,26 +81,23 @@ else if ($page_sidebar_positioning == 'left' || $page_sidebar_positioning == 'ri
 				</header>
 				<form action="<?php echo SocialChef_Theme_Utils::get_current_page_url(); ?>" id="login-form" method="post">
 					<?php if( is_wp_error( $login ) ){ ?>
-						<div class="alert alert-danger"><?php _e('Incorrect username or password. Please try again.', 'socialchef') ?></div>
+						<div class="alert alert-danger"><?php _e('Identifiant ou mot de passe incorrect. S\'il vous plaît essayer à nouveau', 'socialchef') ?></div>
 					<?php } ?>
 					<div class="f-row">
-						<input type="text" name="log" id="log" placeholder="<?php esc_attr_e('Your username', 'socialchef'); ?>" />
+						<input type="text" name="log" id="log" placeholder="<?php esc_attr_e('Login', 'socialchef'); ?>" />
 					</div>
 					<div class="f-row">
-						<input type="password" name="pwd" id="pwd" placeholder="<?php esc_attr_e('Your password', 'socialchef'); ?>" />
+						<input type="password" name="pwd" id="pwd" placeholder="<?php esc_attr_e('Mot de passe', 'socialchef'); ?>" />
 					</div>
 					
-					<div class="f-row">
-						<input type="checkbox" name="rememberme" id="rememberme" />
-						<label for="rememberme"><?php _e('Remember me next time', 'socialchef'); ?></label>
-					</div>
+
 					<div class="f-row bwrap">
 						<?php wp_nonce_field('login_form','login_form_nonce'); ?>
 						<input type="hidden" name="redirect_to" value="<?php echo esc_url( $_SERVER['REQUEST_URI'] ); ?>" />
 						<input type="submit" value="<?php esc_attr_e('Login', 'socialchef'); ?>" id="login" name="login" />
 					</div>
-					<p><?php echo sprintf(__("<a href='%s'>Forgotten password?</a>", 'socialchef'), esc_url( $sc_theme_globals->get_reset_password_page_url()) ); ?></p>
-					<p><?php echo sprintf(__("Don't have an account yet? <a href='%s'>Sign up.</a>", 'socialchef'), esc_url( $sc_theme_globals->get_register_page_url()) ); ?></p>
+					<p><?php echo sprintf(__("<a href='%s'>Mot de passe oublié?</a>", 'socialchef'), esc_url( $sc_theme_globals->get_reset_password_page_url()) ); ?></p>
+					<p><?php echo sprintf(__("Vous n'avez pas de compte ? <a href='%s'>Inscrivez-vous.</a>", 'socialchef'), esc_url( $sc_theme_globals->get_register_page_url()) ); ?></p>
 				</form>
 			</div>
 		</section>

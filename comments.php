@@ -82,10 +82,10 @@ if ( post_password_required() ) { ?>
 	ob_start();
 	?>
 		<div class="third last">
-			<input type="text" id="url" name="url" placeholder="<?php esc_attr_e('Website', 'socialchef'); ?>" value="<?php echo esc_attr( $comment_author_url ); ?>" />
+			<input type="text" id="gsm" name="gsm" placeholder="<?php esc_attr_e('Gsm', 'socialchef'); ?>" value="" />
 		</div>
 	<?php
-	$fields['url'] = ob_get_contents();
+	$fields['gsm'] = ob_get_contents();
 	ob_end_clean();
 	
 	$args['fields'] = $fields;

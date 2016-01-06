@@ -12,11 +12,13 @@ get_sidebar('under-header');
 global $sc_theme_globals, $post;
 $form_submitted = false;
 
+
+
 if(isset($_POST['contact_form_submit'])) {
 	
 	$form_submitted = true;	
 	
-	$success_message = __('Thank you for contacting us. We will get back to you as quick as we can!', 'socialchef');
+	$success_message = __('Merci de nous avoir contacter. Nous reviendrons vers vous aussi vite que nous le pouvons!', 'socialchef');
 	
 	if ( empty($_POST) || !wp_verify_nonce($_POST['contact_form_nonce'],'contact_form') )
 	{
@@ -82,23 +84,24 @@ if(isset($_POST['contact_form_submit'])) {
 						<?php 	} // !empty($contact_error_message) ?>					
 						<?php } else { ?>
 						<div class="f-row">
-							<input name="contact_form_name" id="contact_form_name" type="text" placeholder="<?php esc_attr_e('Your name', 'socialchef'); ?>" required="required" />
+							<input name="contact_form_name" id="contact_form_name" type="text" placeholder="<?php esc_attr_e('Nom', 'socialchef'); ?>" required="required" />
 						</div>
 						<div class="f-row">
-							<input name="contact_form_surname" id="contact_form_surname" type="text" placeholder="<?php esc_attr_e('Your surname', 'socialchef'); ?>" />
+							<input name="contact_form_surname" id="contact_form_surname" type="text" placeholder="<?php esc_attr_e('Prénom', 'socialchef'); ?>" />
 						</div>
 						<div class="f-row">
-							<input name="contact_form_email" id="contact_form_email" type="email" placeholder="<?php esc_attr_e('Your email', 'socialchef'); ?>" required="required" />
+							<input name="contact_form_email" id="contact_form_email" type="email" placeholder="<?php esc_attr_e('Email', 'socialchef'); ?>" required="required" />
 						</div>
 						<div class="f-row">
-							<input id="contact_form_phone" name="contact_form_phone" type="text" placeholder="<?php esc_attr_e('Your phone number', 'socialchef'); ?>" />
+							<input  id="contact_form_phone" name="contact_form_phone" type="text" placeholder="<?php esc_attr_e('Numéro de téléphone', 'socialchef'); ?>" />
 						</div>
 						<div class="f-row">
-							<textarea id="contact_form_message" name="contact_form_message" placeholder="<?php esc_attr_e('Your message', 'socialchef'); ?>" required="required"></textarea>
+							<textarea value="aaaa" id="contact_form_message" name="contact_form_message" placeholder="<?php esc_attr_e('Votre message', 'socialchef'); ?>" required="required"> <?php if(isset($_GET['a'])){echo"J'ai bien aimé le produit : ".$_GET['a'];}?></textarea>
 						</div>
+
 						<?php wp_nonce_field('contact_form','contact_form_nonce'); ?>
 						<div class="f-row bwrap">
-							<input type="submit" value="<?php esc_attr_e('Send message', 'socialchef'); ?>" id="contact_form_submit" name="contact_form_submit" />
+							<input type="submit" value="<?php esc_attr_e('Envoyer le message', 'socialchef'); ?>" id="contact_form_submit" name="contact_form_submit" />
 						</div>
 						<?php } // form_submitted ?>					
 					</form>

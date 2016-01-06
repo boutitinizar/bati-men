@@ -291,40 +291,35 @@ class SocialChef_Recipes_Post_Type extends SocialChef_BaseSingleton {
 		$recipes_permalink_slug = $sc_theme_globals->get_recipes_permalink_slug();
 			
 		$labels = array(
-			'name'                => __( 'Recipes', 'Post Type General Name', 'socialchef' ),
-			'singular_name'       => __( 'Recipe', 'Post Type Singular Name', 'socialchef' ),
-			'menu_name'           => __( 'Recipes', 'socialchef' ),
-			'all_items'           => __( 'All Recipes', 'socialchef' ),
-			'view_item'           => __( 'View Recipe', 'socialchef' ),
-			'add_new_item'        => __( 'Add New Recipe', 'socialchef' ),
-			'add_new'             => __( 'New Recipes', 'socialchef' ),
-			'edit_item'           => __( 'Edit Recipes', 'socialchef' ),
-			'update_item'         => __( 'Update Recipes', 'socialchef' ),
-			'search_items'        => __( 'Search Recipes', 'socialchef' ),
-			'not_found'           => __( 'No Recipes found', 'socialchef' ),
-			'not_found_in_trash'  => __( 'No Recipes found in Trash', 'socialchef' ),
+			'name'                => __( 'Offres', 'Post Type General Name', 'socialchef' ),
+			'singular_name'       => __( 'Offre', 'Post Type Singular Name', 'socialchef' ),
+			'menu_name'           => __( 'Offres', 'socialchef' ),
+			'all_items'           => __( 'Toutes les offres', 'socialchef' ),
+			'view_item'           => __( 'Voir offre', 'socialchef' ),
+			'add_new_item'        => __( 'Ajouter offre', 'socialchef' ),
+			'add_new'             => __( 'Nouvelle offre', 'socialchef' ),
 		);
 		$args = array(
 			'label'               => __( 'recipe', 'socialchef' ),
 			'description'         => __( 'Recipe information pages', 'socialchef' ),
 			'labels'              => $labels,
-			'supports'            => array( 'title', 'editor', 'thumbnail', 'author', 'excerpt', 'comments' ),
-			'taxonomies'          => array( ),
-			'hierarchical'        => false,
+			'hierarchical'        => true,
+			'supports'            => array( 'title', 'editor', 'thumbnail', 'author' , 'comments' ),
+			'taxonomies'          => array(),
 			'public'              => true,
 			'show_ui'             => true,
 			'show_in_menu'        => true,
 			'show_in_nav_menus'   => true,
 			'show_in_admin_bar'   => true,
 			'can_export'          => true,
-			'has_archive'         => false,
-			'exclude_from_search' => false,
+			'has_archive'         => true,
+			'exclude_from_search' => true,
 			'publicly_queryable'  => true,
 			'capability_type'     => 'page',
 			'rewrite' => array('slug' => $recipes_permalink_slug),
 		);
 		
-		register_post_type( 'recipe', $args );	
+		register_post_type( 'recipe', $args );
 	}
 
 	function create_meal_course_taxonomy(){
@@ -370,27 +365,10 @@ class SocialChef_Recipes_Post_Type extends SocialChef_BaseSingleton {
 		
 		$recipe_category_permalink_slug = $sc_theme_globals->get_recipe_category_permalink_slug();
 
-		$labels = array(
-				'name'              			=> __( 'Categories', 'taxonomy general name', 'socialchef' ),
-				'singular_name'     			=> __( 'Categorie', 'taxonomy singular name', 'socialchef' ),
-				'search_items'      			=> __( 'Rechercher catégories', 'socialchef' ),
-				'all_items'         			=> __( 'Toutes les catégories', 'socialchef' ),
-				'parent_item'                	=> null,
-				'parent_item_colon'          	=> null,
-				'edit_item'         			=> __( 'Edit Category', 'socialchef' ),
-				'update_item'       			=> __( 'Update Category', 'socialchef' ),
-				'add_new_item'      			=> __( 'Add New Category', 'socialchef' ),
-				'new_item_name'     			=> __( 'New Category Name', 'socialchef' ),
-				'separate_items_with_commas'	=> __( 'Separate categories with commas', 'socialchef' ),
-				'add_or_remove_items'       	=> __( 'Add or remove categories', 'socialchef' ),
-				'choose_from_most_used'      	=> __( 'Choose from the most used categories', 'socialchef' ),
-				'not_found'                  	=> __( 'No categories found.', 'socialchef' ),
-				'menu_name'        				=> __( 'Categories', 'socialchef' ),
-			);
 			
 		$args = array(
-				'hierarchical'      			=> false,
-				'labels'            			=> $labels,
+				'hierarchical'      			=> true,
+				'labels'            			=>array(),
 				'show_ui'           			=> true,
 				'show_admin_column' 			=> true,
 				'query_var'         			=> true,

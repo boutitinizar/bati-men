@@ -79,140 +79,17 @@ class SocialChef_Theme_MetaBoxes extends SocialChef_BaseSingleton {
 	
 		$this->recipe_custom_meta_fields = array(
 			array( // Post ID select box
-				'label'	=> __('Is Featured', 'socialchef'), // <label>
-				'desc'	=> __('Show in lists where only featured items are shown.', 'socialchef'), // description
+				'label'	=> __('Promotions ?', 'socialchef'), // <label>
+				'desc'	=> __('.', 'socialchef'), // description
 				'id'	=> 'recipe_is_featured', // field id and name
 				'type'	=> 'checkbox', // type of field
-			),
-			array( // Taxonomy Select box
-				'label'	=> __('Recipe difficulty', 'socialchef'), // <label>
-				// the description is created in the callback function with a link to Manage the taxonomy terms
-				'id'	=> 'recipe_difficulty', // field id and name, needs to be the exact name of the taxonomy
-				'type'	=> 'tax_select' // type of field
-			),
-			array( // Taxonomy Select box
-				'label'	=> __('Recipe meal course', 'socialchef'), // <label>
-				// the description is created in the callback function with a link to Manage the taxonomy terms
-				'id'	=> 'recipe_meal_course', // field id and name, needs to be the exact name of the taxonomy
-				'type'	=> 'tax_select' // type of field
-			),
-			array( // Post ID select box
-				'label'	=> __('Preparation time (in minutes)', 'socialchef'), // <label>
-				'desc'	=> '', // description
-				'id'	=> 'recipe_preparation_time', // field id and name
-				'type'	=> 'slider',
-				'min'	=> '1',
-				'max'	=> '360',
-				'step'	=> '1'
-			),
-			array( // Post ID select box
-				'label'	=> __('Cooking time (in minutes)', 'socialchef'), // <label>
-				'desc'	=> '', // description
-				'id'	=> 'recipe_cooking_time', // field id and name
-				'type'	=> 'slider',
-				'min'	=> '1',
-				'max'	=> '360',
-				'step'	=> '1'
-			),
-			array( // Post ID select box
-				'label'	=> __('Serving (number of people)', 'socialchef'), // <label>
-				'desc'	=> '', // description
-				'id'	=> 'recipe_serving', // field id and name
-				'type'	=> 'slider',
-				'min'	=> '1',
-				'max'	=> '10',
-				'step'	=> '1'
-			),
-			array( // Repeatable & Sortable Text inputs
-				'label'	=> __('Instructions', 'socialchef'), // <label>
-				'desc'	=> __('Instructions for creating this recipe (step by step)', 'socialchef'), // description
-				'id'	=> 'recipe_instructions', // field id and name
-				'type'	=> 'repeatable', // type of field
-				'sanitizer' => array( // array of sanitizers with matching kets to next array
-					'featured' => 'meta_box_sanitize_boolean',
-					'title' => 'sanitize_text_field',
-					'desc' => 'wp_kses_data'
-				),
-				'repeatable_fields' => array ( // array of fields to be repeated
-					array( // Instruction ID field
-						'label'	=> __('Instruction', 'socialchef'), // <label>
-						'id'	=> 'instruction', // field id and name
-						'type'	=> 'textarea' // type of field
-					)
-					//,
-					// array( // Image ID field
-						// 'label'	=> __('Image', 'socialchef'), // <label>
-						// 'id'	=> 'image', // field id and name
-						// 'type'	=> 'image' // type of field
-					// )
-				)
-			),
-			array( // Repeatable & Sortable Text inputs
-				'label'	=> __('Ingredients', 'socialchef'), // <label>
-				'desc'	=> __('Ingredients for creating this recipe', 'socialchef'), // description
-				'id'	=> 'recipe_ingredients', // field id and name
-				'type'	=> 'repeatable', // type of field
-				'sanitizer' => array( // array of sanitizers with matching kets to next array
-					'featured' => 'meta_box_sanitize_boolean',
-					'title' => 'sanitize_text_field',
-					'desc' => 'wp_kses_data'
-				),
-				'repeatable_fields' => array ( // array of fields to be repeated
-					array( // Instruction ID field
-						'label'	=> __('Amount', 'socialchef'), // <label>
-						'id'	=> 'amount', // field id and name
-						'type'	=> 'text' // type of field
-					),
-					array( // Taxonomy Select box
-						'label'	=> __('Ingredient', 'socialchef'), // <label>
-						// the description is created in the callback function with a link to Manage the taxonomy terms
-						'id'	=> 'ingredient', // field id and name, needs to be the exact name of the taxonomy
-						'type'	=> 'tax_select' // type of field
-					),
-					array( // Taxonomy Select box
-						'label'	=> __('Ingredient unit', 'socialchef'), // <label>
-						// the description is created in the callback function with a link to Manage the taxonomy terms
-						'id'	=> 'ingredient_unit', // field id and name, needs to be the exact name of the taxonomy
-						'type'	=> 'tax_select' // type of field
-					),
-				)
 			)
-			
 		);
 		
 		global $sc_theme_globals;
 		if ($sc_theme_globals->enable_nutritional_elements()) {
 		
-			$this->recipe_custom_meta_fields[] = array( // Repeatable & Sortable Text inputs
-				'label'	=> __('Nutritional values', 'socialchef'), // <label>
-				'desc'	=> __('Nutritional values for creating this recipe', 'socialchef'), // description
-				'id'	=> 'recipe_nutritional_values', // field id and name
-				'type'	=> 'repeatable', // type of field
-				'sanitizer' => array( // array of sanitizers with matching kets to next array
-					'featured' => 'meta_box_sanitize_boolean',
-					'title' => 'sanitize_text_field',
-					'desc' => 'wp_kses_data'
-				),
-				'repeatable_fields' => array ( // array of fields to be repeated
-					array( // Instruction ID field
-						'label'	=> __('Amount', 'socialchef'), // <label>
-						'id'	=> 'amount', // field id and name
-						'type'	=> 'text' // type of field
-					),
-					array( // Taxonomy Select box
-						'label'	=> __('Nutritional element', 'socialchef'), // <label>
-						// the description is created in the callback function with a link to Manage the taxonomy terms
-						'id'	=> 'nutritional_element', // field id and name, needs to be the exact name of the taxonomy
-						'type'	=> 'tax_select' // type of field
-					),
-					array( // Taxonomy Select box
-						'label'	=> __('Nutritional unit', 'socialchef'), // <label>
-						// the description is created in the callback function with a link to Manage the taxonomy terms
-						'id'	=> 'nutritional_unit', // field id and name, needs to be the exact name of the taxonomy
-						'type'	=> 'tax_select' // type of field
-					),
-				)
-			);
+
 		
 		}
 		

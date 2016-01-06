@@ -103,3 +103,29 @@ require_once SocialChef_Theme_Utils::get_file_path('/includes/theme_post_types.p
 require_once SocialChef_Theme_Utils::get_file_path('/includes/theme_meta_boxes.php');
 require_once SocialChef_Theme_Utils::get_file_path('/includes/post_types/recipe.class.php');
 require_once SocialChef_Theme_Utils::get_file_path('/includes/post_types/post.class.php');
+
+
+
+
+if ( function_exists('register_sidebar') ) {
+	register_sidebar(array(
+		'name' => 'offre Sidebar',
+		'id' => 'offre-sidebar',
+		'description' => 'Appears as the sidebar on the custom offre',
+		'before_widget' => '<div ></div><li id="%1$s" class="widget %2$s">',
+		'after_widget' => '</li>',
+		'before_title' => '<h2 class="widgettitle">',
+		'after_title' => '</h2>',
+	));
+}
+
+
+
+//gsm Comment
+
+
+add_action('comment_post','save_comment_meta');
+function save_comment_meta($comment_id){
+	add_comment_meta($comment_id,'gsm',$_POST['gsm'],true);
+}
+ 

@@ -57,42 +57,44 @@ if( isset( $_POST['user_login'] ) &&  isset( $_POST['user_email'] ) && isset($_P
 
 	// validate username
 	if ( trim( $register_userdata['user_login'] ) == '' ) {
-		$sc_signup_errors['user_login'] = __( 'Username is required.', 'socialchef' );
+		$sc_signup_errors['user_login'] = __( 'Nom d\'utilisateur est nécessaire', 'socialchef' );
 	}
 	else if ( strlen( $register_userdata['user_login'] ) < 6 ) {
-		$sc_signup_errors['user_login'] = __( 'Sorry, username must be 6 characters or more.', 'socialchef' );
+		$sc_signup_errors['user_login'] = __( 'Désolé , nom d\'utilisateur doit être de 6 caractères ou plus', 'socialchef' );
 	}
 	else if ( !validate_username( $register_userdata['user_login'] ) ) {
-		$sc_signup_errors['user_login'] = __( 'Sorry, the username you provided is invalid.', 'socialchef' );
+		$sc_signup_errors['user_login'] = __( 'Désolé , le nom d\'utilisateur que vous avez fournie est invalide .
+.', 'socialchef' );
 	}
 	else if ( username_exists( $register_userdata['user_login'] ) ) {
-		$sc_signup_errors['user_login'] = __( 'Sorry, that username already exists.', 'socialchef' );
+		$sc_signup_errors['user_login'] = __( 'Désolé, ce nom d\'utilisateur existe déjà
+', 'socialchef' );
 	}
 
 	if ($sc_theme_globals->let_users_set_pass()) {
 		// validate password
 		if ( trim( $register_userdata['user_pass'] ) == '' ) {
-			$sc_signup_errors['user_pass'] = __( 'Password is required.', 'socialchef' );
+			$sc_signup_errors['user_pass'] = __( 'Mot de passe requis.', 'socialchef' );
 		}
 		else if ( strlen( $register_userdata['user_pass'] ) < 6 ) {
-			$sc_signup_errors['user_pass'] = __( 'Sorry, password must be 6 characters or more.', 'socialchef' );
+			$sc_signup_errors['user_pass'] = __( 'Désolé , le mot de passe doit être de 6 caractères ou plus .', 'socialchef' );
 		}
 		else if ( $register_userdata['user_pass'] !== $register_userdata['confirm_pass'] ) {
-			$sc_signup_errors['confirm_pass'] = __( 'Password and repeat password fields must match.', 'socialchef' );
+			$sc_signup_errors['confirm_pass'] = __( 'Mot de passe et répétez les champs doivent correspondre.', 'socialchef' );
 		}
 	}
 	
 	// validate user_email
 	if ( !is_email( $register_userdata['user_email'] ) ) {
-		$sc_signup_errors['user_email'] = __( 'You must enter a valid email address.', 'socialchef' );
+		$sc_signup_errors['user_email'] = __( 'Vous devez entrer une adresse email valide .', 'socialchef' );
 	}
 	else if ( email_exists( $register_userdata['user_email'] ) ) {
-		$sc_signup_errors['user_email'] = __( 'Sorry, that email address is already in use.', 'socialchef' );
+		$sc_signup_errors['user_email'] = __( 'Désolé , cette adresse est déjà utilisée.', 'socialchef' );
 	}
 
 	// validate agree
 	if( $register_usermeta['agree'] == '0' ){
-		$sc_signup_errors['agree'] = __( 'You must agree to our terms &amp; conditions to sign up.', 'socialchef' );
+		$sc_signup_errors['agree'] = __( 'Vous devez accepter nos conditions & amp ; conditions pour vous inscrire.', 'socialchef' );
 	}
 
 	if( empty( $sc_signup_errors ) ){
@@ -155,7 +157,7 @@ else if ($page_sidebar_positioning == 'left' || $page_sidebar_positioning == 'ri
 				<?php
 					if( isset( $_GET['action'] ) && $_GET['action'] == 'registered'){ ?>
 					<div class="alert alert-success">
-						<?php _e( 'Account was successfully created. Please click the activation link in the email we just sent you to complete the registration process.', 'socialchef' ) ?>
+						<?php _e( 'Le compte a été créé avec succès. S\'il vous plaît cliquer sur le lien d\'activation dans l\'e-mail que nous venons de vous envoyer pour terminer le processus d\'inscription', 'socialchef' ) ?>
 					</div>
 				<?php
 				} else if( isset( $_GET['action'] ) && $_GET['action'] == 'activate' && isset( $_GET['user_id'] ) && isset( $_GET['activation_key'] ) ){
@@ -188,7 +190,7 @@ else if ($page_sidebar_positioning == 'left' || $page_sidebar_positioning == 'ri
 						<div class="alert alert-danger"><?php _e('Errors were encountered during signup form processing. Please try again.', 'socialchef') ?></div>
 					<?php } ?>
 					<div class="f-row">
-						<input tabindex="1" type="text" id="user_login" name="user_login" placeholder="<?php esc_attr_e('Username', 'socialchef'); ?>" value="<?php echo isset($register_userdata['user_login']) ? $register_userdata['user_login'] : ''; ?>" />
+						<input tabindex="1" type="text" id="user_login" name="user_login" placeholder="<?php esc_attr_e('Login', 'socialchef'); ?>" value="<?php echo isset($register_userdata['user_login']) ? $register_userdata['user_login'] : ''; ?>" />
 						<?php if( isset( $sc_signup_errors['user_login'] ) ){ ?>
 						<div class="alert alert-danger"><?php echo $sc_signup_errors['user_login']; ?></div>
 						<?php } ?>
@@ -216,7 +218,7 @@ else if ($page_sidebar_positioning == 'left' || $page_sidebar_positioning == 'ri
 						<input type="hidden" name="redirect_to" value="<?php echo esc_url( $_SERVER['REQUEST_URI'] ); ?>" />
 						<input type="submit" value="<?php esc_attr_e('Login', 'socialchef'); ?>" id="register" name="register" />
 					</div>
-					<p><?php echo sprintf(__("<a href='%s'>Forgotten your password?</a>", 'socialchef'), $sc_theme_globals->get_reset_password_page_url()); ?></p>
+					<p><?php echo sprintf(__("<a href='%s'>Mot de passe oublié?</a>", 'socialchef'), $sc_theme_globals->get_reset_password_page_url()); ?></p>
 					<p><?php echo sprintf(__("Already a member? <a href='%s'>Login.</a>", 'socialchef'), $sc_theme_globals->get_login_page_url()); ?></p>
 				</form>
 				<?php } ?>
