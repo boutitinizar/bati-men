@@ -21,6 +21,7 @@ if ( get_query_var('paged') ) {
 } else {
     $paged = 1;
 }
+
 $posts_per_page = $sc_theme_globals->get_recipes_archive_posts_per_page();
 
 $page_custom_fields = get_post_custom( $page_id);
@@ -87,6 +88,8 @@ else if ($page_sidebar_positioning == 'left' || $page_sidebar_positioning == 'ri
 		<!--three-fourth-->
 		<?php 
 		$recipe_results = $sc_recipes_post_type->list_recipes($paged, $posts_per_page, $sort_by, $sort_order, array(), array(), array(), array(), array(), $show_featured_only);
+
+
 		if ( count($recipe_results) > 0 && $recipe_results['total'] > 0 ) { ?>
 		<section class="content <?php echo esc_attr($section_class); ?>">
 			<div class="entries row">

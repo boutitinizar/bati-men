@@ -69,7 +69,7 @@ class socialchef_Recipe_List_Widget extends WP_Widget {
 		echo $before_widget;
 		
 		/* Display Widget */		
-		$recipe_results = $sc_recipes_post_type->list_recipes( 1, $number_of_recipes, $sort_by, $order, $recipe_meal_course_ids, $recipe_difficulty_ids, $recipe_category_ids, array(), array(), $show_featured_only );
+		$recipe_results = $sc_recipes_post_type->list_recipes( 1, $number_of_recipes, $sort_by, $order, $recipe_meal_course_ids, $recipe_difficulty_ids, array(), array(), array(), $show_featured_only );
 		?>
 		<!--cwrap-->
 		<div class="cwrap">
@@ -133,8 +133,8 @@ class socialchef_Recipe_List_Widget extends WP_Widget {
 				}?>
 				<!--//entries-->
 					<div class="quicklinks">
-						<a href="<?php echo esc_url ($sc_theme_globals->get_recipe_list_page_url()); ?>" class="button"><?php _e('More recipes', 'socialchef'); ?></a>
-						<a href="javascript:void(0)" class="button scroll-to-top"><?php _e('Back to top', 'socialchef'); ?></a>
+						<a href="/consulter-nos-offres" class="button"><?php _e('Toutes nos offres', 'socialchef'); ?></a>
+						<a href="javascript:void(0)" class="button scroll-to-top"><?php _e('Haut', 'socialchef'); ?></a>
 					</div>
 				</div><?php
 			}
@@ -252,65 +252,16 @@ class socialchef_Recipe_List_Widget extends WP_Widget {
 			</select>
 		</p>
 		
-		<p>
-			<label><?php _e('Recipe categories', 'socialchef') ?></label>
-			<div>
-				<?php for ($j=0;$j<count($recipe_categories);$j++) { 
-					$category = $recipe_categories[$j];
-					$checked = false;
-					if (isset($instance['recipe_category_ids'])) {
-						if (in_array($category->term_id, $instance['recipe_category_ids']))
-							$checked = true;
-					}
-				?>
-				<input <?php echo ($checked ? 'checked="checked"' : ''); ?> type="checkbox" id="<?php echo esc_attr ( $this->get_field_name( 'recipe_category_ids' ) ); ?>_<?php echo esc_attr ($category->term_id); ?>" name="<?php echo esc_attr ( $this->get_field_name( 'recipe_category_ids' ) ); ?>[]" value="<?php echo esc_attr ($category->term_id); ?>">
-				<label for="<?php echo esc_attr ( $this->get_field_name( 'recipe_category_ids' ) ); ?>_<?php echo esc_attr ($category->term_id); ?>"><?php echo $category->name; ?></label>
-				<br />
-				<?php } ?>
-			</div>
-		</p>
+
 		
-		<p>
-			<label><?php _e('Recipe difficulties', 'socialchef') ?></label>
-			<div>
-				<?php for ($j=0;$j<count($recipe_difficulties);$j++) { 
-					$category = $recipe_difficulties[$j];
-					$checked = false;
-					if (isset($instance['recipe_difficulty_ids'])) {
-						if (in_array($category->term_id, $instance['recipe_difficulty_ids']))
-							$checked = true;
-					}
-				?>
-				<input <?php echo ($checked ? 'checked="checked"' : ''); ?> type="checkbox" id="<?php echo esc_attr( $this->get_field_name( 'recipe_difficulty_ids' ) ); ?>_<?php echo esc_attr ($category->term_id); ?>" name="<?php echo esc_attr( $this->get_field_name( 'recipe_difficulty_ids' ) ); ?>[]" value="<?php echo esc_attr ($category->term_id); ?>">
-				<label for="<?php echo esc_attr( $this->get_field_name( 'recipe_difficulty_ids' ) ); ?>_<?php echo esc_attr ($category->term_id); ?>"><?php echo $category->name; ?></label>
-				<br />
-				<?php } ?>
-			</div>
-		</p>
-		
-		<p>
-			<label><?php _e('Recipe meal course', 'socialchef') ?></label>
-			<div>
-				<?php for ($j=0;$j<count($recipe_meal_courses);$j++) { 
-					$category = $recipe_meal_courses[$j];
-					$checked = false;
-					if (isset($instance['recipe_meal_course_ids'])) {
-						if (in_array($category->term_id, $instance['recipe_meal_course_ids']))
-							$checked = true;
-					}
-				?>
-				<input <?php echo ($checked ? 'checked="checked"' : ''); ?> type="checkbox" id="<?php echo esc_attr ( $this->get_field_name( 'recipe_meal_course_ids' ) ); ?>_<?php echo esc_attr ($category->term_id); ?>" name="<?php echo esc_attr ( $this->get_field_name( 'recipe_meal_course_ids' ) ); ?>[]" value="<?php echo esc_attr ($category->term_id); ?>">
-				<label for="<?php echo esc_attr ( $this->get_field_name( 'recipe_meal_course_ids' ) ); ?>_<?php echo esc_attr ($category->term_id); ?>"><?php echo $category->name; ?></label>
-				<br />
-				<?php } ?>
-			</div>
-		</p>
+
+
 		
 		<p>
 			<label for="<?php echo esc_attr ( $this->get_field_id( 'show_featured_only' ) ); ?>"><?php _e('Show only featured recipes?', 'socialchef') ?></label>
 			<input type="checkbox"  <?php echo ($instance['show_featured_only'] == '1' ? 'checked="checked"' : ''); ?> class="checkbox" id="<?php echo esc_attr ( $this->get_field_id( 'show_featured_only' ) ); ?>" name="<?php echo esc_attr ( $this->get_field_name( 'show_featured_only' ) ); ?>" value="1" />
 		</p>
-		
+
 		<p class="cards" <?php echo ($instance['display_mode'] != 'card' ? 'style="display:none"' : ''); ?>>
 			<label for="<?php echo esc_attr ( $this->get_field_id( 'recipes_per_row' ) ); ?>"><?php _e('How many posts do you want to display per row?', 'socialchef') ?></label>
 			<select id="<?php echo esc_attr ( $this->get_field_id( 'recipes_per_row' ) ); ?>" name="<?php echo esc_attr ( $this->get_field_name( 'recipes_per_row' ) ); ?>">
@@ -319,7 +270,7 @@ class socialchef_Recipe_List_Widget extends WP_Widget {
 				<?php } ?>
 			</select>
 		</p>
-		
+
 	<?php
 	}	
 

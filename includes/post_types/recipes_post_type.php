@@ -815,8 +815,7 @@ class SocialChef_Recipes_Post_Type extends SocialChef_BaseSingleton {
 		}
 
 		if (!empty($category_names)) {
-			die(print_r($category_names));
-			$tax_query[] = array(
+				$tax_query[] = array(
 				'taxonomy' => 'recipe_category',
 				'field' => 'term_id',
 				'terms' => $category_names,

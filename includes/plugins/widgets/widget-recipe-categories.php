@@ -47,8 +47,9 @@ class socialchef_Recipe_Categories_Widget extends WP_Widget {
 		$category_count = isset($instance['category_count']) ? (int)$instance['category_count'] : 15;
 
 		$cat_args = array( 
-			'taxonomy'=>'recipe_category', 
+			'taxonomy'=>'recipe_category',
 			'hide_empty'=>'1',
+			'hierarchical'=>'0',
 			'number' => $category_count
 		);
 		$recipe_categories = get_categories($cat_args);
