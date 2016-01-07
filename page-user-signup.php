@@ -189,6 +189,25 @@ else if ($page_sidebar_positioning == 'left' || $page_sidebar_positioning == 'ri
 					<?php if( isset($errors) && count( $errors ) > 0 ){ ?>
 						<div class="alert alert-danger"><?php _e('Errors were encountered during signup form processing. Please try again.', 'socialchef') ?></div>
 					<?php } ?>
+
+					<div class="f-row">
+						<input  type="text" id="first_name" name="first_name" placeholder=" Prénom" value="" />
+					 </div>
+					<div class="f-row">
+						<input  type="text" id="last_name" name="last_name" placeholder="Nom" value="" />
+					</div>
+					<div class="f-row">
+						<input type="text" id="Raison_Social" name="Raison_Social" placeholder="Raison Social" value="" />
+					</div>
+					<div class="f-row">
+						<input  type="text" id="Adresse" name="Adresse" placeholder="Adresse" value="" />
+					</div>
+					<div class="f-row">
+						<input   type="text" id="Tel" name="Tel" placeholder="Tél" value="" />
+					</div>
+
+
+
 					<div class="f-row">
 						<input tabindex="1" type="text" id="user_login" name="user_login" placeholder="<?php esc_attr_e('Login', 'socialchef'); ?>" value="<?php echo isset($register_userdata['user_login']) ? $register_userdata['user_login'] : ''; ?>" />
 						<?php if( isset( $sc_signup_errors['user_login'] ) ){ ?>

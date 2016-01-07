@@ -122,10 +122,23 @@ if ( function_exists('register_sidebar') ) {
 
 
 //gsm Comment
-
-
 add_action('comment_post','save_comment_meta');
 function save_comment_meta($comment_id){
 	add_comment_meta($comment_id,'gsm',$_POST['gsm'],true);
 }
+
+
+//user extra filds
+function modify_contact_methods($profile_fields) {
+
+	// Add new fields
+	$profile_fields['Raison_Social'] = 'Raison Social';
+	$profile_fields['Adresse'] = 'Adresse';
+	$profile_fields['Tel'] = 'Tél';
+
+	return $profile_fields;
+}
+add_filter('user_contactmethods', 'modify_contact_methods');
+
+
  
