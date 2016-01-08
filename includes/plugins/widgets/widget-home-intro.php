@@ -59,8 +59,12 @@ class socialchef_Home_Intro_Widget extends WP_Widget {
 		if (is_home() || is_front_page()) {
 			$before_widget = str_replace('class="socialchef_home_intro_widget', 'class="socialchef_home_intro_widget three-fourth text', $before_widget);
 		}
+
+
+
 		
-		echo $before_widget;		
+		echo $before_widget;
+		echo "<h1>".$title."</h1>";
 		/* Display Widget */
 		?>
 			<?php 

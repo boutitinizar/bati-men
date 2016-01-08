@@ -66,13 +66,15 @@ class socialchef_Search_Widget extends WP_Widget {
 			$before_widget = str_replace('class="socialchef_search_widget', 'class="socialchef_search_widget one-fourth', $before_widget);
 		}
 		echo $before_widget;
-		
+
 		/* Display Widget */
 		?>
 			<div class="container">
 				<div class="textwrap">
 					<?php echo $before_title . $title . $after_title; ?>
 					<?php echo $search_intro_text; ?>
+					<br/>
+					<br/>
 				</div>
 				<form method="get" action="<?php echo esc_url( $custom_search_page_url ); ?>">
 					<div class="f-row">
