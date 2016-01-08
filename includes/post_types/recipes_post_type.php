@@ -304,7 +304,7 @@ class SocialChef_Recipes_Post_Type extends SocialChef_BaseSingleton {
 			'description'         => __( 'Recipe information pages', 'socialchef' ),
 			'labels'              => $labels,
 			'hierarchical'        => true,
-			'supports'            => array( 'title', 'editor', 'thumbnail', 'author' , 'comments' ),
+			'supports'            => array( 'title', 'editor', 'thumbnail', 'author' , 'comments','recipe_difficulty' ),
 			'taxonomies'          => array(),
 			'public'              => true,
 			'show_ui'             => true,
@@ -315,12 +315,13 @@ class SocialChef_Recipes_Post_Type extends SocialChef_BaseSingleton {
 			'has_archive'         => true,
 			'exclude_from_search' => true,
 			'publicly_queryable'  => true,
-			'capability_type'     => 'page',
+			'capability_type'     => 'post',
 			'rewrite' => array('slug' => $recipes_permalink_slug),
 		);
 		
 		register_post_type( 'recipe', $args );
-	}
+
+		}
 
 	function create_meal_course_taxonomy(){
 	
@@ -380,40 +381,23 @@ class SocialChef_Recipes_Post_Type extends SocialChef_BaseSingleton {
 	}
 
 	function create_recipe_difficulty_taxonomy(){
-	
-		global $sc_theme_globals;
-		
-		$difficulty_permalink_slug = $sc_theme_globals->get_difficulty_permalink_slug();
-		
+
 		$labels = array(
-				'name'              			=> __( 'Difficulty', 'taxonomy general name', 'socialchef' ),
-				'singular_name'     			=> __( 'Difficulty', 'taxonomy singular name', 'socialchef' ),
-				'search_items'      			=> __( 'Search Difficulties', 'socialchef' ),
-				'all_items'        				=> __( 'All Difficulties', 'socialchef' ),
-				'parent_item'                	=> null,
-				'parent_item_colon'          	=> null,
-				'edit_item'         			=> __( 'Edit Difficulty', 'socialchef' ),
-				'update_item'       			=> __( 'Update Difficulty', 'socialchef' ),
-				'add_new_item'      			=> __( 'Add New Difficulty', 'socialchef' ),
-				'new_item_name'     			=> __( 'New Difficulty Name', 'socialchef' ),
-				'separate_items_with_commas' 	=> __( 'Separate difficulties with commas', 'socialchef' ),
-				'add_or_remove_items'        	=> __( 'Add or remove difficulties', 'socialchef' ),
-				'choose_from_most_used'      	=> __( 'Choose from the most used difficulties', 'socialchef' ),
-				'not_found'                  	=> __( 'No difficulties found.', 'socialchef' ),
-				'menu_name'         			=> __( 'Difficulty', 'socialchef' ),
+				'name'              			=> __( 'Gouvernorat', 'taxonomy general name', 'socialchef' ),
+				'singular_name'     			=> __( 'Gouvernorats', 'taxonomy singular name', 'socialchef' ),
 			);
 			
 		$args = array(
-				'hierarchical'      			=> false,
-				'labels'            			=> $labels,
-				'show_ui'           			=> true,
-				'show_admin_column' 			=> true,
-				'query_var'         			=> true,
-				'update_count_callback' 		=> '_update_post_term_count',
-				'rewrite'           			=> array( 'slug' => $difficulty_permalink_slug ),
-			);
+		'labels'            			=> $labels,
+         'hierarchical'      			=> true,
+		'show_ui'           			=> true,
+		'show_admin_column' 			=> true,
+		'query_var'         			=> true,
+		'update_count_callback' 		=> '_update_post_term_count',
+		'rewrite'           			=> array( 'slug' =>'Gouvernorat' ),
+		);
 		
- //register_taxonomy( 'recipe_difficulty', array( 'recipe' ), $args );
+  register_taxonomy( 'recipe_difficulty', array( 'recipe' ), $args );
 	}
 	
 	function create_ingredient_taxonomy() {

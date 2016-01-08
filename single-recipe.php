@@ -25,6 +25,16 @@ if ( have_posts() ) while ( have_posts() ) :
 	$recipe_Prix = $recipe_obj->get_post_meta('recipe_Prix');
 	$recipe_Remise = $recipe_obj->get_post_meta('recipe_Remise');
 
+	$recipe_difficulty = $recipe_obj->get_difficulty();
+	if(!empty($recipe_difficulty)){
+		$recipe_difficulty = $recipe_difficulty->name;
+	}else{
+		$recipe_difficulty = false;
+	}
+
+
+
+
 
 	// Generate microformat time values for Schema.org compatibility
 	//$mf_recipe_cooking_time = SocialChef_Theme_Utils::time_to_iso8601_duration(strtotime($recipe_cooking_time . " minutes", 0));
@@ -79,9 +89,20 @@ if ( have_posts() ) while ( have_posts() ) :
 
 								<dt><?php _e('Posté par', 'socialchef'); ?></dt>
 								<dd itemprop="author" class="vcard author post-author"><span class="fn"><a href="<?php echo esc_url( $author_uri ); ?>"><?php echo $author_nice_name; ?></a></span></dd>
+
 								<dt><?php _e('Posté le', 'socialchef'); ?></dt>
 								<dd  itemprop="datePublished" content="<?php echo get_the_date(); ?>"  class="post-date updated"><?php echo get_the_date(); ?></dd>
+
+                                <?php if($recipe_difficulty): ?>
+
+									<dt><?php _e('Gouvernorat', 'socialchef'); ?></dt>
+									<dd  itemprop="datePublished" content="<?php echo $recipe_difficulty; ?>"  class="post-date updated"><?php echo $recipe_difficulty; ?></dd>
+
+                                <?php  endif; ?>
+
+
 								<?php
+
 
 								if($expirationdatets){
 								?>

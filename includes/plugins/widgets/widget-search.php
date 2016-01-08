@@ -104,6 +104,30 @@ class socialchef_Search_Widget extends WP_Widget {
 						</select>
 					</div>
 
+					<div class="f-row">
+						<select name="diff">
+							<option value="0">Sélectionnez un gouvernorat</option>
+							<?php
+							$args = array(
+								'taxonomy'=>'recipe_difficulty',
+								'hide_empty'=>'1'
+							);
+							$difficulties = get_categories($args);
+
+							if (count($difficulties) > 0) {
+								for ($i = 0; $i < count($difficulties); $i++) {
+									if (isset($difficulties[$i])) {
+										$difficulty = $difficulties[$i];
+										$term_id = $difficulty->term_id;
+										$term_name = $difficulty->name;
+										?>
+										<option value="<?php echo esc_attr( $term_id ); ?>"><?php echo $term_name; ?></option>
+									<?php	}
+								}
+							} ?>
+						</select>
+					</div>
+
 
 					<div class="f-row bwrap">
 						<input type="submit" value="Trouver une offre" />
