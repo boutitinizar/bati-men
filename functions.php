@@ -141,4 +141,35 @@ function modify_contact_methods($profile_fields) {
 add_filter('user_contactmethods', 'modify_contact_methods');
 
 
+function revcon_change_post_label() {
+	global $menu;
+	global $submenu;
+	$menu[5][0] = 'Recrutement';
+	$submenu['edit.php'][5][0] = 'Recrutement';
+	$submenu['edit.php'][10][0] = 'Add Recrutement';
+	$submenu['edit.php'][16][0] = 'Recrutement Tags';
+	echo '';
+}
+function revcon_change_post_object() {
+	global $wp_post_types;
+	$labels = &$wp_post_types['post']->labels;
+	$labels->name = 'Recrutement';
+	$labels->singular_name = 'Recrutement';
+	$labels->add_new = 'Ajouter Recrutement';
+	$labels->add_new_item = 'Ajouter Recrutement';
+	$labels->edit_item = 'Modifier Recrutement';
+	$labels->new_item = 'Recrutement';
+	$labels->view_item = 'Voir Recrutement';
+	$labels->search_items = 'Search Recrutement';
+	$labels->not_found = 'No Recrutement found';
+	$labels->not_found_in_trash = 'No Recrutement found in Trash';
+	$labels->all_items = 'tous Recrutements';
+	$labels->menu_name = 'Recrutements';
+	$labels->name_admin_bar = 'Recrutements';
+}
+
+add_action( 'admin_menu', 'revcon_change_post_label' );
+add_action( 'init', 'revcon_change_post_object' );
+
+
  

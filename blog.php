@@ -1,5 +1,5 @@
 <?php
-/* Template Name: Blog index page */
+/* Template Name: Blog  page */
 /*
  * The template for displaying the blog index page (list of blog posts)
  * @package WordPress
@@ -71,7 +71,7 @@ $args = array(
 						<a href="<?php echo esc_url( get_author_posts_url(get_the_author_meta( 'ID' )) ) ?>"><?php echo get_avatar( get_the_author_meta( 'ID' ), 32 ); ?><span><?php echo get_the_author() ?></span></a>
 					</div>
 				</div>
-				<div class="container">
+				<div class="container" style="float: left;width: 80%">
 					<?php if ( has_post_thumbnail() ) { ?>
 					<div class="entry-featured"><a href="<?php the_permalink() ?>"><?php the_post_thumbnail('featured', array('title' => get_the_title())); ?></a></div>
 					<?php } ?>
@@ -79,14 +79,7 @@ $args = array(
 						<h2><a href="<?php the_permalink() ?>" title="<?php the_title(); ?>"><?php the_title(); ?></a></h2>
 						<?php the_excerpt(); ?>
 					</div>
-					<div class="actions">
-						<div>
-							<div class="category"><i class="ico i-category"></i><?php the_category(' ') ?></div>
-							<div class="comments"><i class="ico  i-comments"></i><a href="<?php comments_link(); ?>"><?php comments_number('0','1','%'); ?></a></div>
-							<div class="leave_comment"><a href="<?php comments_link(); ?>"><?php _e('Leave a comment', 'socialchef'); ?></a></div>
-							<div class="more"><a href="<?php the_permalink() ?>"><?php _e('Read more', 'socialchef'); ?></a></div>
-						</div>
-					</div>
+
 				</div>
 			</article>
 			<!--//blog post-->

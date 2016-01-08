@@ -17,14 +17,17 @@
 	$footer_call_to_action = $sc_theme_globals->get_footer_call_to_action();
 	if (!empty($footer_call_to_action)) { ?>
 	<!--call to action-->
-		<?php kw_sc_logo_carousel('default');
-		?>
+
+
 	<section class="cta">
 		<div class="wrap clearfix">
 			<a href="<?php echo esc_url($sc_theme_globals->get_footer_call_to_action_url()); ?>" class="button big white right"><?php echo $sc_theme_globals->get_footer_call_to_action_button(); ?></a>
 			<h2><?php echo $sc_theme_globals->get_footer_call_to_action(); ?></h2>
 		</div>
 	</section>
+		<div class="row" style="display: block; height: 150px;float: left; margin-left: 10%">
+			<?php kw_sc_logo_carousel('default');?>
+		</div>
 	<!--//call to action-->	
 	<?php } ?>
 
