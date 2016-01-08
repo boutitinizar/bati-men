@@ -89,6 +89,7 @@ require_once SocialChef_Theme_Utils::get_file_path('/includes/plugins/widgets/wi
 require_once SocialChef_Theme_Utils::get_file_path('/includes/plugins/widgets/widget-featured-recipe.php');
 require_once SocialChef_Theme_Utils::get_file_path('/includes/plugins/widgets/widget-featured-member.php');
 require_once SocialChef_Theme_Utils::get_file_path('/includes/plugins/widgets/widget-share.php');
+require_once SocialChef_Theme_Utils::get_file_path('/includes/plugins/widgets/widget_mnb_banner.php');
 
  
 
@@ -172,4 +173,108 @@ add_action( 'admin_menu', 'revcon_change_post_label' );
 add_action( 'init', 'revcon_change_post_object' );
 
 
- 
+//bannières publicitaires custom post
+
+
+
+	$labels = array (
+		'name' => __('Bannières publicitaires ', 'kiwi_logo_carousel' ),
+		'singular_name' => __('Bannières publicitaires', 'kiwi_logo_carousel' ),
+		'add_new' => __( 'Add New Bannière publicitaire', 'kiwi_logo_carousel' ),
+		'add_new_item' => __( 'Add New Bannières publicitaires', 'kiwi_logo_carousel' ),
+		'edit_item' => __( 'Edit Bannière  publicitaire', 'kiwi_logo_carousel' ),
+		'new_item' => __( 'New Bannière publicitaire', 'kiwi_logo_carousel' ),
+
+		'menu_name' => __('Bannières publicitaires', 'kiwi_logo_carousel' ),
+	);
+	$args = array(
+		'labels' => $labels,
+		'hierarchical' => false,
+		'supports' => array(
+			'title',
+			'thumbnail',
+			'page-attributes'
+		),
+		'public' => false,
+		'show_ui' => true,
+		'show_in_menu' => true,
+		'show_in_nav_menus' => false,
+		'publicly_queryable' => true,
+		'exclude_from_search' => true,
+		'has_archive' => true,
+		'query_var' => true,
+		'can_export' => true,
+		'rewrite' => true,
+		'capability_type' => 'post',
+		'menu_icon' =>'dashicons-welcome-write-blog' ,
+	);
+	register_post_type( 'mnb_bannieres', $args );
+
+
+
+
+add_action( 'add_meta_boxes', 'add_events_metaboxes' );
+function add_events_metaboxes() {
+    add_meta_box('wpt_events_location', 'Url banniere', 'wpt_events_location', 'mnb_bannieres', 'side', 'default');
+ }
+
+
+
+function wpt_events_location() {
+	global $post;
+
+	// Noncename needed to verify where the data originated
+	echo '<input type="hidden" name="eventmeta_noncename" id="eventmeta_noncename" value="' .
+		wp_create_nonce( plugin_basename(__FILE__) ) . '" />';
+
+	// Get the location data if its already been entered
+	$location = get_post_meta($post->ID, '_location', true);
+
+	// Echo out the field
+	echo '<input type="text" name="_location" value="' . $location  . '" class="widefat" />';
+
+}
+
+// Meta Box Link Contents
+function metabox_link_contents() {
+	echo '<p>';
+	_e('Add an URL to make this logo clickable');
+	echo '</p>';
+	$value = get_post_meta( get_the_ID(), '_kwlogos_link', true );
+}
+
+// Save the Metabox Data
+
+function wpt_save_events_meta($post_id, $post) {
+
+	// verify this came from the our screen and with proper authorization,
+	// because save_post can be triggered at other times
+	if ( !wp_verify_nonce( $_POST['eventmeta_noncename'], plugin_basename(__FILE__) )) {
+		return $post->ID;
+	}
+
+	// Is the user allowed to edit the post or page?
+	if ( !current_user_can( 'edit_post', $post->ID ))
+		return $post->ID;
+
+	// OK, we're authenticated: we need to find and save the data
+	// We'll put it into an array to make it easier to loop though.
+
+	$events_meta['_location'] = $_POST['_location'];
+
+	// Add values of $events_meta as custom fields
+
+	foreach ($events_meta as $key => $value) { // Cycle through the $events_meta array!
+		if( $post->post_type == 'revision' ) return; // Don't store custom data twice
+		$value = implode(',', (array)$value); // If $value is an array, make it a CSV (unlikely)
+		if(get_post_meta($post->ID, $key, FALSE)) { // If the custom field already has a value
+			update_post_meta($post->ID, $key, $value);
+		} else { // If the custom field doesn't have a value
+			add_post_meta($post->ID, $key, $value);
+		}
+		if(!$value) delete_post_meta($post->ID, $key); // Delete if blank
+	}
+
+}
+
+add_action('save_post', 'wpt_save_events_meta', 1, 2);

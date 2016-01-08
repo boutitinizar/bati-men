@@ -59,7 +59,7 @@ class socialchef_Recipe_Categories_Widget extends WP_Widget {
 		echo $before_widget;
 		
 		/* Display Widget */
-		echo $before_title . $title . $after_title; 
+		echo "<h5>". $title ."</h5>";
 
 		if ($show_category_icons) {
 			if (count($recipe_categories) > 0) { 
