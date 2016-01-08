@@ -6,7 +6,9 @@
 <?php	
 	}
 	global $bp, $sc_theme_globals;
-?>		
+?>
+
+
 	</main><!--//main-->
 	<?php get_sidebar('above-footer'); ?>
 	<?php do_action( 'bp_after_container' ); ?>
@@ -15,6 +17,8 @@
 	$footer_call_to_action = $sc_theme_globals->get_footer_call_to_action();
 	if (!empty($footer_call_to_action)) { ?>
 	<!--call to action-->
+		<?php kw_sc_logo_carousel('default');
+		?>
 	<section class="cta">
 		<div class="wrap clearfix">
 			<a href="<?php echo esc_url($sc_theme_globals->get_footer_call_to_action_url()); ?>" class="button big white right"><?php echo $sc_theme_globals->get_footer_call_to_action_button(); ?></a>
@@ -23,7 +27,10 @@
 	</section>
 	<!--//call to action-->	
 	<?php } ?>
+
+
 	<?php do_action( 'bp_before_footer'   ); ?>
+
 	<!--footer-->
 	<footer class="foot" role="contentinfo">
 		<div class="wrap clearfix">

@@ -5,7 +5,7 @@
 	$recipe_obj = new sc_recipe($post);
 $recipe_Prix = $recipe_obj->get_post_meta('recipe_Prix');
 $recipe_Remise = $recipe_obj->get_post_meta('recipe_Remise');
- 
+
 	//$recipe_difficulty = $recipe_obj->get_difficulty();
 	$recipe_comments = get_comments_number( $recipe_id );
 ?>
