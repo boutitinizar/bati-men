@@ -86,8 +86,7 @@ class socialchef_Search_Widget extends WP_Widget {
 							<?php 
 							$args = array( 
 								'taxonomy'=>'recipe_category', 
-								'hide_empty'=>'1',
-								'hide_empty'=>'1',
+								'hide_empty'=>'0',
 			                    'hierarchical'=>'0'
 							);
 							$recipe_categories = get_categories($args);
@@ -112,7 +111,8 @@ class socialchef_Search_Widget extends WP_Widget {
 							<?php
 							$args = array(
 								'taxonomy'=>'recipe_difficulty',
-								'hide_empty'=>'1'
+								'hide_empty'=>'0',
+								'hierarchical'=>'0'
 							);
 							$difficulties = get_categories($args);
 
