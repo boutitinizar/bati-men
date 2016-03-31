@@ -1806,3 +1806,7 @@ div.bbp-search-form input, div.bbp-search-form button {padding:9px 14px !importa
  .instructions ol	{margin:0;}
  .instructions li 	{margin:0 0 20px;padding:0;}
 }
+#above-footer-sidebar ul li{
+    float: left;
+    margin-left: 50px;
+}
