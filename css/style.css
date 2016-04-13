@@ -277,6 +277,7 @@ div.actions				{display:inline-block;width:100%;vertical-align:sub;float:right;f
 .actions div div				{float:left;border-right:1px solid #ddd;padding:0 15px 0 0;margin:0 14px 0 0;color:#666;}
 .actions div div:last-child 	{border:none;padding:0;margin:0;}
 .actions div div a 				{color:#666 !important;}
+.actions .likes  a 				{color:#006400 !important; font-size: 16px}
 .actions .ico 			{margin:0 8px -3px 0;color:#C5AA83;-webkit-text-shadow:none;-moz-text-shadow:none;text-shadow:none;font-size:20px;}
 .actions .comments		{border-top:none;-webkit-box-shadow:none;-moz-box-shadow:none;box-shadow:none;width:auto;float:right;}
 .actions .more			{min-width:50px;}
@@ -1809,4 +1810,8 @@ div.bbp-search-form input, div.bbp-search-form button {padding:9px 14px !importa
 #above-footer-sidebar ul li{
     float: left;
     margin-left: 50px;
+}
+.bx-viewport ul {
+    list-style: none;
+    color: #005684;
 }
