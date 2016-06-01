@@ -270,7 +270,7 @@ $terms = get_terms($taxonomies, $args);
 				</div>
 			<?php } else { ?>
 			<div class="alert alert-warning">
-				<p><?php _e('Malheureusement aucun résultat n\'a été trouvé pour votre recherche . S\'il vous plaît essayez de rechercher autre chose.', 'socialchef'); ?></p>
+				<p><?php _e('Malheureusement aucun résultat n\'a été trouvé pour votre critère de recherche. S\'il vous plaît essayez d\'autres critères.', 'socialchef'); ?></p>
 			</div>
 			<?php } ?>
 		</section><!--//three-fourth-->
