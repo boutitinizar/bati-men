@@ -123,7 +123,7 @@ else if ($page_sidebar_positioning == 'left' || $page_sidebar_positioning == 'ri
 					<div class="f-row bwrap">
 						<?php wp_nonce_field('resetpassword_form','resetpassword_form_nonce'); ?>
 						<input type="hidden" name="redirect_to" value="<?php echo esc_url( $_SERVER['REQUEST_URI'] ); ?>" />
-						<input type="submit" value="<?php esc_attr_e('Réinitialiser le mot de passe', 'socialchef'); ?>" id="resetpassword" name="resetpassword" />
+						<input type="submit" value="<?php esc_attr_e('Réinitialiser', 'socialchef'); ?>" id="resetpassword" name="resetpassword" />
 					</div>
 				</form>
 				<?php } ?>
