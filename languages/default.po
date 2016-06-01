@@ -1970,11 +1970,11 @@ msgid "From what date is this member featured"
 msgstr ""
 
 #: ../includes/theme_actions.php:540
-msgid "Password"
+msgid "Mot de passe"
 msgstr ""
 
 #: ../includes/theme_actions.php:546
-msgid "Repeat password"
+msgid "Répéter le mot de passe"
 msgstr ""
 
 #: ../includes/theme_filters.php:70

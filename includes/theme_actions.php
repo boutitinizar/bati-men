@@ -537,13 +537,13 @@ class SocialChef_Theme_Actions extends SocialChef_BaseSingleton {
 				
 			if ($let_users_set_pass) { ?>
 			<div class="f-row">
-				<input id="user_pass" class="input" type="password" placeholder="<?php esc_attr_e('Password', 'socialchef'); ?>" tabindex="30" size="25" value="" name="user_pass" />
+				<input id="user_pass" class="input" type="password" placeholder="<?php esc_attr_e('Mot de passe', 'socialchef'); ?>" tabindex="30" size="25" value="" name="user_pass" />
 				<?php if( isset( $sc_signup_errors['user_pass'] ) ){ ?>
 				<div class="alert alert-danger"><?php echo $sc_signup_errors['user_pass']; ?></div>
 				<?php } ?>
 			</div>
 			<div class="f-row">
-				<input id="confirm_pass" class="input" type="password" tabindex="40" size="25" placeholder="<?php esc_attr_e('Repeat password', 'socialchef'); ?>" value="" name="confirm_pass" />
+				<input id="confirm_pass" class="input" type="password" tabindex="40" size="25" placeholder="<?php esc_attr_e('Répéter le mot de passe', 'socialchef'); ?>" value="" name="confirm_pass" />
 				<?php if( isset( $sc_signup_errors['confirm_pass'] ) ){ ?>
 				<div class="alert alert-danger"><?php echo $sc_signup_errors['confirm_pass']; ?></div>
 				<?php } ?>

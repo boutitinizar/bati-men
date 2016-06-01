@@ -163,31 +163,31 @@ else if ($page_sidebar_positioning == 'left' || $page_sidebar_positioning == 'ri
 				} else if( isset( $_GET['action'] ) && $_GET['action'] == 'activate' && isset( $_GET['user_id'] ) && isset( $_GET['activation_key'] ) ){
 					if( SocialChef_Theme_Utils::activate_user( wp_kses( $_GET['user_id'], '' ), wp_kses( $_GET['activation_key'], '' ) ) ) { ?>
 						<div class="alert alert-success">
-							<?php _e( 'User account successfully activated.', 'socialchef' ) ?>
+							<?php _e( 'Compte d\'utilisateur activé avec succès.', 'socialchef' ) ?>
 						</div>
 					<?php
 					} else {	?>
 					<div class="alert alert-danger">
-						<?php _e( 'An error was encountered when attempting to activate your account.', 'socialchef' ) ?>
+						<?php _e( 'Une erreur est survenue lors d\'une tentative pour activer votre compte .', 'socialchef' ) ?>
 					</div>
 					<?php
 					}
 				} else if( isset( $_GET['action'] ) && $_GET['action'] == 'sendactivation' && isset( $_GET['user_id'] ) ){
 					if( SocialChef_Theme_Utils::activation_notification( wp_kses( $_GET['user_id'], '', '' ) ) ) { ?>
 						<div class="alert alert-success">
-							<?php _e( 'Activation link was successfully sent.', 'socialchef' ) ?>
+							<?php _e( 'Le lien d\'activation a été envoyé avec succès .', 'socialchef' ) ?>
 						</div>
 					<?php
 					} else { ?>
 						<div class="alert alert-danger">
-							<?php _e( 'An error was encountered when attempting to send the activation link. Please try again later.', 'socialchef' ) ?>
+							<?php _e( 'Une erreur est survenue lors de la tentative d\'envoyer le lien d\'activation . Veuillez réessayer plus tard.', 'socialchef' ) ?>
 						</div>
 					<?php
 					}
 				} else { ?>				
 				<form action="<?php echo SocialChef_Theme_Utils::get_current_page_url(); ?>" id="register-form" method="post">
 					<?php if( isset($errors) && count( $errors ) > 0 ){ ?>
-						<div class="alert alert-danger"><?php _e('Errors were encountered during signup form processing. Please try again.', 'socialchef') ?></div>
+						<div class="alert alert-danger"><?php _e('Des erreurs ont été rencontrées au cours du traitement de formulaire d\'inscription . Veuillez réessayer.', 'socialchef') ?></div>
 					<?php } ?>
 
 					<div class="f-row">
@@ -227,7 +227,7 @@ else if ($page_sidebar_positioning == 'left' || $page_sidebar_positioning == 'ri
 					<?php do_action('register_form', true); ?>  				
 					<div class="f-row">
 						<input type="checkbox" name="checkboxagree" name="checkboxagree" />
-						<label for="checkboxagree"><?php echo sprintf(__('I agree to the <a href="%s">terms &amp; conditions</a>.', 'socialchef'), esc_url( $sc_theme_globals->get_terms_page_url())); ?></label>
+						<label for="checkboxagree"><?php echo sprintf(__('je suis d\'accord avec les <a href="%s">Ttermes &amp; conditions</a>.', 'socialchef'), esc_url( $sc_theme_globals->get_terms_page_url())); ?></label>
 						<?php if( isset( $sc_signup_errors['agree'] ) ){ ?>
 						<div class="alert alert-danger"><?php echo $sc_signup_errors['agree']; ?></div>
 						<?php } ?>
@@ -238,7 +238,7 @@ else if ($page_sidebar_positioning == 'left' || $page_sidebar_positioning == 'ri
 						<input type="submit" value="<?php esc_attr_e('Login', 'socialchef'); ?>" id="register" name="register" />
 					</div>
 					<p><?php echo sprintf(__("<a href='%s'>Mot de passe oublié?</a>", 'socialchef'), $sc_theme_globals->get_reset_password_page_url()); ?></p>
-					<p><?php echo sprintf(__("Already a member? <a href='%s'>Login.</a>", 'socialchef'), $sc_theme_globals->get_login_page_url()); ?></p>
+					<p><?php echo sprintf(__("Déjà membre? <a href='%s'>Login.</a>", 'socialchef'), $sc_theme_globals->get_login_page_url()); ?></p>
 				</form>
 				<?php } ?>
 			</div>
