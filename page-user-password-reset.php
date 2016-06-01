@@ -32,9 +32,9 @@ if( isset( $_POST['user_email'] ) && wp_verify_nonce( $_POST['resetpassword_form
 	if ( !is_email( $resetpassword_userdata['user_email'] ) ) {
 		$user = get_user_by('login', $resetpassword_userdata['user_email']);
 		if (!$user)
-			$errors['user_email'] = __( 'You must enter a valid and existing email address or username.', 'socialchef' );
+			$errors['user_email'] = __( 'Vous devez entrer une adresse e-mail valide et existant ou nom d\'utilisateur .', 'socialchef' );
 	} else if ( !email_exists( $resetpassword_userdata['user_email'] ) ) {
-		$errors['user_email'] = __( 'You must enter a valid and existing email address or username.', 'socialchef' );
+		$errors['user_email'] = __( 'Vous devez entrer une adresse e-mail valide et existant ou nom d\'utilisateur .', 'socialchef' );
 	}
 	
 	if( empty( $errors ) ){
@@ -93,7 +93,7 @@ else if ($page_sidebar_positioning == 'left' || $page_sidebar_positioning == 'ri
 				</header>
 				<?php if ( isset( $_GET['action'] ) && $_GET['action'] == 'resetpasswordnotification' ) { ?>
 				<div class="alert alert-success">
-					<?php _e( 'Please confirm the request to reset your password by clicking the link sent to your email address.', 'socialchef' ) ?>
+					<?php _e( 'S\'il vous plaît confirmer la demande de réinitialiser votre mot de passe en cliquant sur le lien envoyé à votre adresse e-mail .', 'socialchef' ) ?>
 				</div>
 				<?php
 				} else if( isset( $_GET['action'] ) && $_GET['action'] == 'resetpassword' && isset( $_GET['login'] ) && isset( $_GET['key'] ) ){ 
@@ -103,13 +103,13 @@ else if ($page_sidebar_positioning == 'left' || $page_sidebar_positioning == 'ri
 					$new_password_sent = SocialChef_Theme_Utils::new_password_notification( $user_login, $new_password );
 					if( $new_password && $new_password_sent ) { ?>
 					<div class="alert alert-success">
-						<?php _e( 'Your password was successfully reset. We have sent the new password to your email address.', 'socialchef' ) ?>
+						<?php _e( 'Votre mot de passe a été réinitialisé avec succès . Nous avons envoyé le nouveau mot de passe à votre adresse e-mail .', 'socialchef' ) ?>
 					</div>
 					<?php
 					} else {?>
 					<div class="alert alert-danger">
-						<?php _e( 'We encountered an error when attempting to reset your password. Please try again later.', 'socialchef' ) ?>
-					</div>
+						<?php _e( 'Nous avons rencontré une erreur lors d\'une tentative pour réinitialiser votre mot de passe. Veuillez réessayer plus tard.', 'socialchef' ) ?>
+			</div>
 					<?php
 					}
 				} else { ?>												
@@ -118,12 +118,12 @@ else if ($page_sidebar_positioning == 'left' || $page_sidebar_positioning == 'ri
 						<div class="alert alert-danger"><?php echo $errors['user_email']; ?></div>
 					<?php } ?> 
 					<div class="f-row">
-						<input type="text" name="user_email" id="user_email" value="" placeholder="<?php esc_attr_e('Username or email address', 'socialchef'); ?>" />
+						<input type="text" name="user_email" id="user_email" value="" placeholder="<?php esc_attr_e('Nom d\'utilisateur ou adresse e-mail', 'socialchef'); ?>" />
 					</div>
 					<div class="f-row bwrap">
 						<?php wp_nonce_field('resetpassword_form','resetpassword_form_nonce'); ?>
 						<input type="hidden" name="redirect_to" value="<?php echo esc_url( $_SERVER['REQUEST_URI'] ); ?>" />
-						<input type="submit" value="<?php esc_attr_e('Reset password', 'socialchef'); ?>" id="resetpassword" name="resetpassword" />
+						<input type="submit" value="<?php esc_attr_e('Réinitialiser le mot de passe', 'socialchef'); ?>" id="resetpassword" name="resetpassword" />
 					</div>
 				</form>
 				<?php } ?>
